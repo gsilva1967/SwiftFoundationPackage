@@ -48,7 +48,7 @@ public struct LargeButton: View {
     // It would be nice to make this into a binding.
     private let disabled: Bool
     
-    init(title: String,
+    public init(title: String,
          disabled: Bool = false,
          backgroundColor: Color = Color.green,
          foregroundColor: Color = Color.white,
