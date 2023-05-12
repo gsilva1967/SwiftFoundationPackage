@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 /**
  Extenstions for Strings
  
@@ -117,6 +117,18 @@ public extension Optional where Wrapped == String {
         }
     }
     
+    var base64ToImage : UIImage? {
+        if (self.isNotNilOrEmpty ) {
+            let decodedData = NSData(base64Encoded: self!, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters)
+            if (decodedData != nil) {
+                let decodedImage = UIImage(data: decodedData! as Data)
+                return decodedImage!
+            } else {
+                return UIImage()
+            }
+        }
+        return UIImage()
+    }
 }
 
 extension String {
@@ -130,4 +142,5 @@ extension String {
         let digitsCharacters = CharacterSet(charactersIn: "0123456789")
         return CharacterSet(charactersIn: self).isSubset(of: digitsCharacters)
     }
+    
 }
