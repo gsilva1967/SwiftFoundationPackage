@@ -11,20 +11,19 @@ import Network
 @available(iOS 16.0, *)
 public final class NetworkMonitor: ObservableObject {
     @Published private(set) var isConnected = false
-    
+
     private let nwMonitor = NWPathMonitor()
     private let workerQueue = DispatchQueue.global()
-    
+
     public func start() {
         nwMonitor.start(queue: workerQueue)
         nwMonitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
                 self?.isConnected = path.status == .satisfied
-                
             }
         }
     }
-    
+
     public func stop() {
         nwMonitor.cancel()
     }

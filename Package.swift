@@ -9,22 +9,28 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "DateExtensions",
-            targets: ["DateExtensions"]),
+            targets: ["DateExtensions"]
+        ),
         .library(
             name: "StringExtensions",
-            targets: ["StringExtensions"]),
+            targets: ["StringExtensions"]
+        ),
         .library(
             name: "SwiftUIHelpers",
-            targets: ["SwiftUIHelpers"]),
+            targets: ["SwiftUIHelpers"]
+        ),
         .library(
             name: "IntExtensions",
-            targets: ["IntExtensions"]),
+            targets: ["IntExtensions"]
+        ),
         .library(
             name: "DoubleExtensions",
-            targets: ["DoubleExtensions"]),
+            targets: ["DoubleExtensions"]
+        ),
         .library(
             name: "SwiftFoundationPackage",
-            targets: ["SwiftFoundationPackage"]),
+            targets: ["SwiftFoundationPackage"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -35,22 +41,28 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "DateExtensions",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
             name: "StringExtensions",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
             name: "SwiftUIHelpers",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
             name: "IntExtensions",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
             name: "DoubleExtensions",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
             name: "SwiftFoundationPackage",
-            dependencies: []),
+            dependencies: []
+        ),
 //        .testTarget(
 //            name: "SwiftFoundationPackageTests",
 //            dependencies: ["SwiftFoundationPackage"]),
