@@ -13,6 +13,18 @@ let package = Package(
         .library(
             name: "StringExtensions",
             targets: ["StringExtensions"]),
+        .library(
+            name: "SwiftUIHelpers",
+            targets: ["SwiftUIHelpers"]),
+        .library(
+            name: "IntExtensions",
+            targets: ["IntExtensions"]),
+        .library(
+            name: "DoubleExtensions",
+            targets: ["DoubleExtensions"]),
+        .library(
+            name: "SwiftFoundationPackage",
+            targets: ["SwiftFoundationPackage"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -26,6 +38,18 @@ let package = Package(
             dependencies: []),
         .target(
             name: "StringExtensions",
+            dependencies: []),
+        .target(
+            name: "SwiftUIHelpers",
+            dependencies: []),
+        .target(
+            name: "IntExtensions",
+            dependencies: []),
+        .target(
+            name: "DoubleExtensions",
+            dependencies: []),
+        .target(
+            name: "SwiftFoundationPackage",
             dependencies: []),
 //        .testTarget(
 //            name: "SwiftFoundationPackageTests",
