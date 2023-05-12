@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 @available(iOS 16.0, *)
-struct LargeButtonStyle: ButtonStyle {
+public struct LargeButtonStyle: ButtonStyle {
     
     let backgroundColor: Color
     let foregroundColor: Color
     let borderColor: Color
     let isDisabled: Bool
     
-    func makeBody(configuration: Self.Configuration) -> some View {
+    public func makeBody(configuration: Self.Configuration) -> some View {
         let currentForegroundColor = isDisabled || configuration.isPressed ? foregroundColor.opacity(0.3) : foregroundColor
         return configuration.label
             .padding()
@@ -34,7 +34,7 @@ struct LargeButtonStyle: ButtonStyle {
 }
 
 @available(iOS 16.0, *)
-struct LargeButton: View {
+public struct LargeButton: View {
     
     private static let buttonHorizontalMargins: CGFloat = 0
     
@@ -62,7 +62,7 @@ struct LargeButton: View {
         self.disabled = disabled
     }
     
-    var body: some View {
+    public var body: some View {
         HStack {
             Spacer(minLength: LargeButton.buttonHorizontalMargins)
             Button(action:self.action) {

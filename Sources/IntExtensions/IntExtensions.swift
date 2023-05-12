@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Int {
+public extension Int {
     var withCommas: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal

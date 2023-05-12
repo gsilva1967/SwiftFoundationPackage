@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 @available(iOS 16.0, *)
-class MessagePopupHandler: ObservableObject {
+public class MessagePopupHandler: ObservableObject {
     // Using a closure allows us to set up our singleton with any setup needed
     static let shared: MessagePopupHandler = {
         let instance = MessagePopupHandler()

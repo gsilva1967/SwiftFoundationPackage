@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-class TextToSpeechHelper {
+public class TextToSpeechHelper {
     let synthesizer = AVSpeechSynthesizer()
     
     func text2speech(text: String) {

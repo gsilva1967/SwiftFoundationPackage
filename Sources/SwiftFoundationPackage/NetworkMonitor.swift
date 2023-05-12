@@ -9,7 +9,7 @@ import Foundation
 import Network
 
 @available(iOS 16.0, *)
-final class NetworkMonitor: ObservableObject {
+public final class NetworkMonitor: ObservableObject {
     @Published private(set) var isConnected = false
     
     private let nwMonitor = NWPathMonitor()

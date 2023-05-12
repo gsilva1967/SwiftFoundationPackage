@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
   func convertForMileage(from originalUnit: UnitLength, to convertedUnit: UnitLength) -> String {
       var rtnVal = ""
       var initialMeasurement: Double
