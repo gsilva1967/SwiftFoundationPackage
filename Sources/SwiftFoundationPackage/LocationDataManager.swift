@@ -11,7 +11,7 @@ import UIKit
 
 @available(iOS 16.0, *)
 public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    var locationManager = CLLocationManager()
+    public var locationManager = CLLocationManager()
     @Published public var authorizationStatus: CLAuthorizationStatus?
     @Published public var locations: [CLLocation]?
     public var startLocation: CLLocation!
