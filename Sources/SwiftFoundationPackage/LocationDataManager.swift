@@ -81,10 +81,9 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
                 print("Traveled Distance:", startLocation.distance(from: location))
             }
 
-//            print("Traveled Distance:",  traveledDistance)
-//            print("Straight Distance:", startLocation.distance(from: locations.last!))
+
         }
-//        lastLocation = locations.last
+        lastLocation = locations.last
     }
 
     public func locationManager(_: CLLocationManager, didFailWithError error: Error) {
