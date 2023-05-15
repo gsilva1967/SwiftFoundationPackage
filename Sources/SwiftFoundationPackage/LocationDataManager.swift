@@ -19,7 +19,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
     var traveledDistance: Double = 0
     var startDate: Date!
 
-    override init() {
+    public override init() {
         super.init()
         UIDevice.current.isBatteryMonitoringEnabled = true
         locationManager.delegate = self
