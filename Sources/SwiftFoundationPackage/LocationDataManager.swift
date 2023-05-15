@@ -12,12 +12,12 @@ import UIKit
 @available(iOS 16.0, *)
 public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
-    @Published var authorizationStatus: CLAuthorizationStatus?
-    @Published var locations: [CLLocation]?
-    var startLocation: CLLocation!
-    var lastLocation: CLLocation!
-    var traveledDistance: Double = 0
-    var startDate: Date!
+    @Published public var authorizationStatus: CLAuthorizationStatus?
+    @Published public var locations: [CLLocation]?
+    public var startLocation: CLLocation!
+    @Published public var lastLocation: CLLocation!
+    @Published public var traveledDistance: Double = 0
+    public var startDate: Date!
 
     public override init() {
         super.init()
