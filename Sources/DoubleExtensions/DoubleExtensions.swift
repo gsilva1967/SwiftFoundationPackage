@@ -29,4 +29,9 @@ public extension Double {
         rtnVal = roundedMeasurement
         return rtnVal
     }
+    
+    // Convert from one unit to another
+    func convert(from originalUnit: UnitLength, to convertedUnit: UnitLength) -> Double {
+        return Measurement(value: self, unit: originalUnit).converted(to: convertedUnit).value
+    }
 }
