@@ -11,15 +11,12 @@ import UIKit
 
 @available(iOS 16.0, *)
 public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    var locationManager = CLLocationManager()
-    @Published var authorizationStatus: CLAuthorizationStatus?
-    @Published var locations: [CLLocation]?
-    var startLocation: CLLocation!
-    var lastLocation: CLLocation!
-    var traveledDistance: Double = 0
-    var startDate: Date!
-
-    override init() {
+    public var locationManager = CLLocationManager()
+    @Published public var authorizationStatus: CLAuthorizationStatus?
+    @Published public var locations: [CLLocation]?
+    @Published public var lastLocation: CLLocation!
+    
+    public override init() {
         super.init()
         UIDevice.current.isBatteryMonitoringEnabled = true
         locationManager.delegate = self
@@ -62,29 +59,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
 
     public func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Insert code to handle location updates
-
-        if startDate == nil {
-            startDate = Date()
-        }
-
-        if startLocation == nil {
-            startLocation = locations.first
-        } else if let location = locations.last {
-            traveledDistance = startLocation.distance(from: location)
-            if traveledDistance > 5 && Date().timeIntervalSinceReferenceDate - startDate.timeIntervalSinceReferenceDate > 5
-            {
-                startLocation = location
-                startDate = Date()
-                self.locations = locations
-                print("I moved 5 meters")
-            } else {
-                print("Traveled Distance:", startLocation.distance(from: location))
-            }
-
-//            print("Traveled Distance:",  traveledDistance)
-//            print("Straight Distance:", startLocation.distance(from: locations.last!))
-        }
-//        lastLocation = locations.last
+        lastLocation = locations.last
     }
 
     public func locationManager(_: CLLocationManager, didFailWithError error: Error) {
