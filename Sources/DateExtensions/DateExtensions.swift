@@ -16,6 +16,19 @@ import Foundation
  # Notes: #
  1. needed for extensions of dates
  */
+
+public class localAdjustedDateformatter: DateFormatter {
+    override public init() {
+        super.init()
+        timeZone = TimeZone.current
+        locale = Locale(identifier: "en_US_POSIX")
+    }
+
+    public required init?(coder _: NSCoder) {
+        super.init()
+    }
+}
+
 public class gmtAdjustedDateformatter: DateFormatter {
     override public init() {
         super.init()
