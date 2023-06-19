@@ -65,7 +65,7 @@ public enum DateFormat: String, Codable, CaseIterable {
     /// returns 02/01/2023
     case shortDate = "MM/dd/yyyy"
     /// returns 2023-02-25T21:35:22
-    case yearMonthDayWithTimeAndSeconds
+    case yearMonthDayWithTimeAndSeconds = "yyyy-MM-ddTHH:mm:ss"
 }
 
 public enum DateComponentEnum {
