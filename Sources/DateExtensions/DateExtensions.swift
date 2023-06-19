@@ -19,7 +19,7 @@ import Foundation
 public class gmtAdjustedDateformatter: DateFormatter {
     override public init() {
         super.init()
-        timeZone = TimeZone(secondsFromGMT: 0)
+        timeZone = TimeZone.current
         locale = Locale(identifier: "en_US_POSIX")
     }
 
