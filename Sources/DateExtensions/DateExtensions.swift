@@ -16,6 +16,19 @@ import Foundation
  # Notes: #
  1. needed for extensions of dates
  */
+
+public class localAdjustedDateformatter: DateFormatter {
+    override public init() {
+        super.init()
+        timeZone = TimeZone.current
+        locale = Locale(identifier: "en_US_POSIX")
+    }
+
+    public required init?(coder _: NSCoder) {
+        super.init()
+    }
+}
+
 public class gmtAdjustedDateformatter: DateFormatter {
     override public init() {
         super.init()
@@ -65,7 +78,7 @@ public enum DateFormat: String, Codable, CaseIterable {
     /// returns 02/01/2023
     case shortDate = "MM/dd/yyyy"
     /// returns 2023-02-25T21:35:22
-    case yearMonthDayWithTimeAndSeconds
+    case yearMonthDayWithTimeAndSeconds = "yyyy-MM-dd'T'HH:mm:ss"
 }
 
 public enum DateComponentEnum {
