@@ -96,7 +96,7 @@ public enum DateComponentEnum {
  */
 public extension Date {
     func formatDate(format: DateFormat, uselocalDateTimeFormatter: Bool = false) -> String {
-        let formatter = uselocalDateTimeFormatter ? gmtAdjustedDateformatter() : localAdjustedDateformatter()
+        let formatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter() 
         formatter.dateFormat = format.rawValue
         return formatter.string(from: self)
     }
