@@ -142,6 +142,7 @@ public extension Date {
         } else if dateString.count == 10 {
             dateFormatter.dateFormat = "YYYY-MM-dd"
         }
+        
 
         let date = dateFormatter.date(from: dateString as String)
 
@@ -352,5 +353,11 @@ public extension Date {
         case 17 ..< 24: return "Good Evening"
         default: return "Hello"
         }
+    }
+    
+    var getLocalDateTime: Date {
+        let timezone = TimeZone.current
+        let seconds = TimeInterval(timezone.secondsFromGMT(for: Date()))
+        return Date(timeInterval: seconds, since: Date())
     }
 }
