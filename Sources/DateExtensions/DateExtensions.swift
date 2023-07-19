@@ -355,7 +355,7 @@ public extension Date {
         }
     }
     
-    var getLocalDateTime: Date {
+    var localTimeZoneDateTime: Date {
         let timezone = TimeZone.current
         let seconds = TimeInterval(timezone.secondsFromGMT(for: Date()))
         return Date(timeInterval: seconds, since: Date())
