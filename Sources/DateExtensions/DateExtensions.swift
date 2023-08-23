@@ -130,8 +130,11 @@ public extension Date {
     func getDateFromString(dateString: String) -> Date {
         let dateFormatter = gmtAdjustedDateformatter()
 
-        if dateString.count == 19 {
+        if dateString.count == 19 && dateString.contains("T") {
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
+        }
+        if dateString.count == 19 && dateString.contains("T") == false {
+            dateFormatter.dateFormat = "YYYY-MM-dd' 'HH:mm:ss"
         }
         if dateString.count == 20 {
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZ"
