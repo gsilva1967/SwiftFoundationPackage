@@ -335,6 +335,11 @@ public extension Date {
         let diffComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: fromDate, to: toDate)
         return diffComponents.hour
     }
+    
+    func getDaysDifference(fromDate: Date, toDate: Date) -> Int? {
+        let diffComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: fromDate, to: toDate)
+        return diffComponents.day
+    }
 
     func getFriendlyDate(date: Date) -> String {
         if Calendar.current.isDateInToday(date) {
