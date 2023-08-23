@@ -340,7 +340,7 @@ public extension Date {
     }
     
     func getDaysDifference(fromDate: Date, toDate: Date) -> Int? {
-        let diffComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: fromDate, to: toDate)
+        let diffComponents = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: fromDate, to: toDate)
         return diffComponents.day
     }
 
