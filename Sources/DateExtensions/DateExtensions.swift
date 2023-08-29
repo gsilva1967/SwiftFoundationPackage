@@ -148,6 +148,8 @@ public extension Date {
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSZ"
         } else if dateString.count == 10 {
             dateFormatter.dateFormat = "YYYY-MM-dd"
+        } else if dateString.count == 8 {
+            dateFormatter.dateFormat = "YYYYMMdd"
         }
         
 
