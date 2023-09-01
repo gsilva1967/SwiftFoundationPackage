@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct BadgeView : View {
-    internal init(value: Binding<Int>, x: Double = 30.0, y: Double = 4.0, foreground: Color = .white, background: Color = .red) {
+    public init(value: Binding<Int>, x: Double = 30.0, y: Double = 4.0, foreground: Color = .white, background: Color = .red) {
         self._value = value
         self.x = x
         self.y = y
