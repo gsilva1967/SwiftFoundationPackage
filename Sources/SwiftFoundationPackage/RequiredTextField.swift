@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct RequiredTextField: View {
-    var title: String
+    public var title: String
     @Binding var valueToBindTo: String
     
     public var body: some View {

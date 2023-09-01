@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct BadgeView : View {
     
-    @Binding var value: Int
+    @Binding public var value: Int
     
     @State var x = 30.0
     @State var y = 4.0

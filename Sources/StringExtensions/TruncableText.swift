@@ -8,11 +8,11 @@
 import SwiftUI
 
 public struct TruncableText: View {
-    let text: Text
-    let lineLimit: Int?
+    public let text: Text
+    public let lineLimit: Int?
     @State private var intrinsicSize: CGSize = .zero
     @State private var truncatedSize: CGSize = .zero
-    let isTruncatedUpdate: (_ isTruncated: Bool) -> Void
+    public let isTruncatedUpdate: (_ isTruncated: Bool) -> Void
 
    public var body: some View {
         text
