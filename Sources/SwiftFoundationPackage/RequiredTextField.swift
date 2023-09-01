@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct RequiredTextField: View {
     public var title: String
-    @Binding var valueToBindTo: String
+    @Binding public var valueToBindTo: String
     
     public var body: some View {
         TextField(title, text: $valueToBindTo).clearButton(text: $valueToBindTo)
