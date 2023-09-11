@@ -13,4 +13,20 @@ public extension Int {
         numberFormatter.numberStyle = .decimal
         return numberFormatter.string(from: NSNumber(value: self))!
     }
+    
+    
+}
+
+public extension Int? {
+    var makeEmptyIfNil: String {
+        if self == nil {
+            return ""
+        } else {
+            return self!.description
+        }
+    }
+    
+    var displayOptionalText: String {
+        return makeEmptyIfNil
+    }
 }
