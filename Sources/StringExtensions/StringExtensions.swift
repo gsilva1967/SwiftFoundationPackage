@@ -92,7 +92,7 @@ public extension Optional where Wrapped == String {
         if self == nil {
             return ""
         } else {
-            return self!
+            return self!.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 
