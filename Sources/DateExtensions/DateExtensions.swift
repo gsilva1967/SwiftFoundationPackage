@@ -374,4 +374,20 @@ public extension Date {
         let seconds = TimeInterval(timezone.secondsFromGMT(for: Date()))
         return Date(timeInterval: seconds, since: Date())
     }
+    
+    func isInRange(startDate: Date, endDate: Date) -> Bool {
+        let newStart = Calendar.current.startOfDay(for: startDate)
+        let newEnd = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: endDate)!)
+        
+        let range = newStart...newEnd
+        
+        if(range.contains(self))
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
 }
