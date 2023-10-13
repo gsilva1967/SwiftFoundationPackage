@@ -375,6 +375,7 @@ public extension Date {
         return Date(timeInterval: seconds, since: Date())
     }
     
+    //Function to return a bool if a date is within the start end date BASED ON DAYS only!
     func isInRange(startDate: Date, endDate: Date) -> Bool {
         let newStart = Calendar.current.startOfDay(for: startDate)
         let newEnd = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: endDate)!)
