@@ -132,26 +132,50 @@ public extension Date {
     func getDateFromString(dateString: String) -> Date {
         let dateFormatter = gmtAdjustedDateformatter()
 
-        if dateString.count == 19 && dateString.contains("T") {
-            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
-        }
-        if dateString.count == 19 && dateString.contains("T") == false {
-            dateFormatter.dateFormat = "YYYY-MM-dd' 'HH:mm:ss"
-        }
-        if dateString.count == 20 {
+        switch dateString.count {
+        case 19:
+            if dateString.count == 19 && dateString.contains("T") {
+                dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
+            }
+            else {
+                dateFormatter.dateFormat = "YYYY-MM-dd' 'HH:mm:ss"
+            }
+        case 20:
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZ"
-        } else if dateString.count == 21 {
+        case 21:
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.S"
-        } else if dateString.count == 22 {
+        case 22:
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SS"
-        } else if dateString.count == 23 {
+        case 23:
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSZ"
-        } else if dateString.count == 10 {
+        case 10:
             dateFormatter.dateFormat = "YYYY-MM-dd"
-        } else if dateString.count == 8 {
+        case 8:
             dateFormatter.dateFormat = "YYYYMMdd"
+        default:
+            dateFormatter.dateFormat = "YYYY-MM-dd"
         }
         
+//        if dateString.count == 19 && dateString.contains("T") {
+//            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
+//        }
+//        if dateString.count == 19 && dateString.contains("T") == false {
+//            dateFormatter.dateFormat = "YYYY-MM-dd' 'HH:mm:ss"
+//        }
+//        if dateString.count == 20 {
+//            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZ"
+//        } else if dateString.count == 21 {
+//            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.S"
+//        } else if dateString.count == 22 {
+//            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SS"
+//        } else if dateString.count == 23 {
+//            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSZ"
+//        } else if dateString.count == 10 {
+//            dateFormatter.dateFormat = "YYYY-MM-dd"
+//        } else if dateString.count == 8 {
+//            dateFormatter.dateFormat = "YYYYMMdd"
+//        }
+//        
 
         let date = dateFormatter.date(from: dateString as String)
 
@@ -373,5 +397,22 @@ public extension Date {
         let timezone = TimeZone.current
         let seconds = TimeInterval(timezone.secondsFromGMT(for: Date()))
         return Date(timeInterval: seconds, since: Date())
+    }
+    
+    //Function to return a bool if a date is within the start end date BASED ON DAYS only!
+    func isInRange(startDate: Date, endDate: Date) -> Bool {
+        let newStart = Calendar.current.startOfDay(for: startDate)
+        let newEnd = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: endDate)!)
+        
+        let range = newStart...newEnd
+        
+        if(range.contains(self))
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
 }
