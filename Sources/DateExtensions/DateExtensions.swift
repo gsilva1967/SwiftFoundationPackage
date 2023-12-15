@@ -104,6 +104,12 @@ public extension Date {
         formatter.dateFormat = format.rawValue
         return formatter.string(from: self)
     }
+    
+    func formatDateIgnoreTimeZone(format: DateFormat) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format.rawValue
+        return formatter.string(from: self)
+    }
 
     /**
      Returns a date with no time associated with it
