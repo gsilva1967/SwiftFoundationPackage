@@ -160,7 +160,7 @@ public extension Date {
             dateFormatter.dateFormat = "YYYYMMdd"
         case 16:
             //"01/03/2024 13:39"
-            dateFormatter.dateFormat = "MM/dd/YYYY HH:mm"
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         default:
             dateFormatter.dateFormat = "YYYY-MM-dd"
         }
