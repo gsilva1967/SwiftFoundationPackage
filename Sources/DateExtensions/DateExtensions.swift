@@ -104,6 +104,12 @@ public extension Date {
         formatter.dateFormat = format.rawValue
         return formatter.string(from: self)
     }
+    
+    func formatDateIgnoreTimeZone(format: DateFormat) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format.rawValue
+        return formatter.string(from: self)
+    }
 
     /**
      Returns a date with no time associated with it
@@ -135,25 +141,27 @@ public extension Date {
         switch dateString.count {
         case 19:
             if dateString.count == 19 && dateString.contains("T") {
-                dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             }
             else {
-                dateFormatter.dateFormat = "YYYY-MM-dd' 'HH:mm:ss"
+                dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm:ss"
             }
         case 20:
-            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZ"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         case 21:
-            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.S"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.S"
         case 22:
-            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SS"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS"
         case 23:
-            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSZ"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         case 10:
-            dateFormatter.dateFormat = "YYYY-MM-dd"
+            dateFormatter.dateFormat = "yyyy-MM-dd"
         case 8:
-            dateFormatter.dateFormat = "YYYYMMdd"
+            dateFormatter.dateFormat = "yyyyMMdd"
+        case 16:
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         default:
-            dateFormatter.dateFormat = "YYYY-MM-dd"
+            dateFormatter.dateFormat = "yyyy-MM-dd"
         }
         
 //        if dateString.count == 19 && dateString.contains("T") {
