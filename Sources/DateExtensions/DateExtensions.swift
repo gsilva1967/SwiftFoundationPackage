@@ -77,6 +77,8 @@ public enum DateFormat: String, Codable, CaseIterable {
     case hoursMinutesSeconds = "HH:mm:ss"
     /// returns 02/01/2023
     case shortDate = "MM/dd/yyyy"
+    /// returns 2023-02-25
+    case yearMonthDay = "yyyy-MM-dd"
     /// returns 2023-02-25T21:35:22
     case yearMonthDayWithTimeAndSeconds = "yyyy-MM-dd'T'HH:mm:ss"
     /// returns 2023-02-25 21:35:22
