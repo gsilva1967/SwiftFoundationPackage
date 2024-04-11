@@ -16,7 +16,6 @@ public struct RequiredTextField: View {
         self.title = title
         self.minLength = minLength
         self._valueToBindTo = valueToBindTo
-        
     }
     
     public var body: some View {
