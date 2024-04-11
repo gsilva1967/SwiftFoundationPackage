@@ -12,9 +12,11 @@ public struct RequiredTextField: View {
     public var minLength: Int = 0
     @Binding public var valueToBindTo: String
     
-    public init(title: String, valueToBindTo: Binding<String>) {
+    public init(title: String, valueToBindTo: Binding<String>, minLength: Int = 0) {
         self.title = title
+        self.minLength = minLength
         self._valueToBindTo = valueToBindTo
+        
     }
     
     public var body: some View {
