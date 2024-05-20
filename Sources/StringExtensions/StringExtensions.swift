@@ -99,6 +99,10 @@ public extension Optional where Wrapped == String {
     var displayOptionalText: String {
         return makeEmptyIfNil
     }
+    
+    var displayEmptyText: String {
+        return self.isNilOrEmpty ? "n/a" : self!
+    }
 
     func replaceForNil(replacement: String = "") -> String {
         if self == nil {
