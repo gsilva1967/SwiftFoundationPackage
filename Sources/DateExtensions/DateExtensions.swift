@@ -162,6 +162,8 @@ public extension Date {
             dateFormatter.dateFormat = "yyyyMMdd"
         case 16:
             dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        case 14:
+            dateFormatter.dateFormat = "yyyyMMdd HH:mm"
         default:
             dateFormatter.dateFormat = "yyyy-MM-dd"
         }
