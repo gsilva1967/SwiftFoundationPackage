@@ -141,6 +141,15 @@ public extension Date {
         let dateFormatter = gmtAdjustedDateformatter()
 
         switch dateString.count {
+       
+        case 23:
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        case 22:
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS"
+        case 21:
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.S"
+        case 20:
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         case 19:
             if dateString.count == 19 && dateString.contains("T") {
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -148,20 +157,14 @@ public extension Date {
             else {
                 dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm:ss"
             }
-        case 20:
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        case 21:
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.S"
-        case 22:
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS"
-        case 23:
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        case 16:
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        case 14:
+            dateFormatter.dateFormat = "yyyyMMdd HH:mm"
         case 10:
             dateFormatter.dateFormat = "yyyy-MM-dd"
         case 8:
             dateFormatter.dateFormat = "yyyyMMdd"
-        case 16:
-            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         default:
             dateFormatter.dateFormat = "yyyy-MM-dd"
         }
