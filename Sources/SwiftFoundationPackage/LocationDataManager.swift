@@ -67,7 +67,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
         print("error: \(error.localizedDescription)")
     }
     
-    func convertAddress(address: String) {
+    public func convertAddress(address: String) {
             getCoordinate(addressString: address) { (location, error) in
                 if error != nil {
                     //handle error
@@ -79,7 +79,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
             }
         }
         
-        private func getCoordinate(addressString : String,
+        public func getCoordinate(addressString : String,
                 completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
             let geocoder = CLGeocoder()
             geocoder.geocodeAddressString(addressString) { (placemarks, error) in
