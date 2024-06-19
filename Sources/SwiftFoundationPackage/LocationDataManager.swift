@@ -15,6 +15,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
     @Published public var authorizationStatus: CLAuthorizationStatus?
     @Published public var locations: [CLLocation]?
     @Published public var lastLocation: CLLocation!
+    @Published var location : CLLocationCoordinate2D?
     
     public override init() {
         super.init()
@@ -65,4 +66,33 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
     public func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         print("error: \(error.localizedDescription)")
     }
+    
+    func convertAddress(address: String) {
+            getCoordinate(addressString: address) { (location, error) in
+                if error != nil {
+                    //handle error
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.location = location
+                }
+            }
+        }
+        
+        private func getCoordinate(addressString : String,
+                completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+                if error == nil {
+                    if let placemark = placemarks?[0] {
+                        let location = placemark.location!
+                            
+                        completionHandler(location.coordinate, nil)
+                        return
+                    }
+                }
+                    
+                completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
+            }
+        }
 }
