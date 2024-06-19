@@ -15,7 +15,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
     @Published public var authorizationStatus: CLAuthorizationStatus?
     @Published public var locations: [CLLocation]?
     @Published public var lastLocation: CLLocation!
-    @Published var location : CLLocationCoordinate2D?
+    @Published public var addressLocation : CLLocationCoordinate2D?
     
     public override init() {
         super.init()
@@ -74,7 +74,7 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
                     return
                 }
                 DispatchQueue.main.async {
-                    self.location = location
+                    self.addressLocation = location
                 }
             }
         }
