@@ -22,6 +22,7 @@ public struct FloatingLabelTextField: View {
     }
 
     public var body: some View {
+        //THis is back to the original
             ZStack(alignment: .leading) {
                 Text(title)
                     .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
