@@ -85,6 +85,8 @@ public enum DateFormat: String, Codable, CaseIterable {
     case yearMonthDayWithTimeAndSecondsNoT = "yyyy-MM-dd HH:mm:ss"
     /// returns 20230225
     case armyFormat = "yyyyMMdd"
+    /// returns August 26
+    case longMonthAndDate = "MMMM dd"
 }
 
 public enum DateComponentEnum {
