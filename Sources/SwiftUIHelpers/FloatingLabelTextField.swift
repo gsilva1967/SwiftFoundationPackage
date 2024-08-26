@@ -26,13 +26,13 @@ public struct FloatingLabelTextField: View {
             Text(title)
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: offset)
-                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.75, anchor: .leading)
+                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.65, anchor: .leading)
                 .animation(.spring(response: 0.4, dampingFraction: 0.3), value: offset)
 
             TextField("", text: text, axis: axis)
                 .background(GeometryReader { gp -> Color in
                     let rect = gp.frame(in: .named("OuterV")) // < in specific container
-                    self.offset = text.wrappedValue.isEmpty ? 0 : ((rect.height / 2) + 30) * -1
+                    self.offset = text.wrappedValue.isEmpty ? 0 : ((rect.height / 2) + 20) * -1
                     return Color.clear
                 })
         }
