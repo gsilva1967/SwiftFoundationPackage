@@ -32,7 +32,7 @@ public struct FloatingLabelTextField: View {
             TextField("", text: text, axis: axis)
                 .background(GeometryReader { gp -> Color in
                     let rect = gp.frame(in: .named("OuterV")) // < in specific container
-                    self.offset = text.wrappedValue.isEmpty ? 0 : ((rect.height / 2) + 20) * -1
+                    self.offset = text.wrappedValue.isEmpty ? 0 : ((rect.height / 2) + 30) * -1
                     return Color.clear
                 })
         }
