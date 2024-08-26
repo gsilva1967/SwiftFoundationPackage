@@ -26,7 +26,7 @@ public struct FloatingLabelTextField: View {
             Text(title)
                 .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
                 .offset(y: offset)
-                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.65, anchor: .leading)
+                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.75, anchor: .leading)
                 .animation(.spring(response: 0.4, dampingFraction: 0.3), value: offset)
 
             TextField("", text: text, axis: axis)
