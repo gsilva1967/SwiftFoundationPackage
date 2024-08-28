@@ -105,13 +105,13 @@ public enum DateComponentEnum {
 public extension Date {
     func formatDate(format: DateFormat, uselocalDateTimeFormatter: Bool = false) -> String {
         let formatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter() 
-        formatter.dateFormat = formatter.locale.is12HoursFormat() ? format.rawValue : format.rawValue + " a"
+        formatter.dateFormat = formatter.locale.is12HoursFormat() ? format.rawValue  + " a" : format.rawValue
         return formatter.string(from: self)
     }
     
     func formatDateIgnoreTimeZone(format: DateFormat) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = formatter.locale.is12HoursFormat() ? format.rawValue : format.rawValue + " a"
+        formatter.dateFormat = formatter.locale.is12HoursFormat() ? format.rawValue  + " a" : format.rawValue
         return formatter.string(from: self)
     }
 
