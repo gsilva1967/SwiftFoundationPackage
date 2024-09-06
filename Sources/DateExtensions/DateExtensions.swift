@@ -105,10 +105,10 @@ public enum DateComponentEnum {
 public extension Date {
     func formatDate(format: DateFormat, uselocalDateTimeFormatter: Bool = false) -> String {
         let formatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter() 
-        if format.rawValue.range(of: "h", options: .caseInsensitive) != nil{
+        if format.rawValue.range(of: "h:", options: .caseInsensitive) != nil{
             
             if Locale.current.is24Hour && format.rawValue.contains("a"){
-                formatter.dateFormat = format.rawValue.replacingOccurrences(of: "a", with: "")
+                formatter.dateFormat = format.rawValue.replacingOccurrences(of: "a", with: "").replacingOccurrences(of: "h:", with: "HH:")
                 return formatter.string(from: self)
             }
             else if Locale.current.is24Hour && format.rawValue.contains("a") == false{
@@ -125,10 +125,10 @@ public extension Date {
     func formatDateIgnoreTimeZone(format: DateFormat) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format.rawValue
-        if format.rawValue.range(of: "h", options: .caseInsensitive) != nil{
+        if format.rawValue.range(of: "h:", options: .caseInsensitive) != nil{
             
             if Locale.current.is24Hour && format.rawValue.contains("a"){
-                formatter.dateFormat = format.rawValue.replacingOccurrences(of: "a", with: "")
+                formatter.dateFormat = format.rawValue.replacingOccurrences(of: "a", with: "").replacingOccurrences(of: "h:", with: "HH:")
                 return formatter.string(from: self)
             }
             else if Locale.current.is24Hour && format.rawValue.contains("a") == false{
