@@ -1,6 +1,6 @@
 //
 //  OptionalTextField.swift
-//  
+//
 //
 //  Created by Michael Kacos on 9/6/24.
 //
@@ -29,3 +29,4 @@ public struct OptionalTextField: View {
         }
     }
 }
+
