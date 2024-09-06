@@ -60,7 +60,7 @@ public enum DateFormat: String, Codable, CaseIterable {
     /// returns Monday, January 4
     case longDayLongMonth = "EEEE, MMMM d"
     /// returns Tuesday 08/12 | 10:20 AM
-    case longDayShortMonthYearAndTime = "EEEE MM/dd | HH:mm"
+    case longDayShortMonthYearAndTime = "EEEE MM/dd | HH:mm a"
     /// returns 24 hour time string: 14:49
     case timeIn24HourFormat = "HH:mm"
     /// returns 24 hour time string: 2:49 PM
@@ -105,13 +105,38 @@ public enum DateComponentEnum {
 public extension Date {
     func formatDate(format: DateFormat, uselocalDateTimeFormatter: Bool = false) -> String {
         let formatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter() 
+        if format.rawValue.range(of: "h", options: .caseInsensitive) != nil{
+            
+            if Locale.current.is24Hour && format.rawValue.contains("a"){
+                formatter.dateFormat = format.rawValue.replacingOccurrences(of: "a", with: "")
+                return formatter.string(from: self)
+            }
+            else if Locale.current.is24Hour && format.rawValue.contains("a") == false{
+                formatter.dateFormat = format.rawValue + " a"
+                return formatter.string(from: self)
+            }
+        }
+        
         formatter.dateFormat = format.rawValue
+                
         return formatter.string(from: self)
     }
     
     func formatDateIgnoreTimeZone(format: DateFormat) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format.rawValue
+        if format.rawValue.range(of: "h", options: .caseInsensitive) != nil{
+            
+            if Locale.current.is24Hour && format.rawValue.contains("a"){
+                formatter.dateFormat = format.rawValue.replacingOccurrences(of: "a", with: "")
+                return formatter.string(from: self)
+            }
+            else if Locale.current.is24Hour && format.rawValue.contains("a") == false{
+                formatter.dateFormat = format.rawValue + " a"
+                return formatter.string(from: self)
+            }
+        }
+        
         return formatter.string(from: self)
     }
 
@@ -432,4 +457,9 @@ public extension Date {
     }
 }
 
-
+extension Locale {
+    var is24Hour: Bool {
+        let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: self)!
+        return dateFormat.firstIndex(of: "a") == nil
+    }
+}
