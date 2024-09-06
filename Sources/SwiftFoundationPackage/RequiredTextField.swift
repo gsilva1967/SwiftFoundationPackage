@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-public struct RequiredTextField2: View {
+public struct RequiredTextField: View {
     public var title: String
     public var minLength: Int = 0
     @Binding public var valueToBindTo: String
