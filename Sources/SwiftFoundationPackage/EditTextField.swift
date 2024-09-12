@@ -32,9 +32,10 @@ public struct EditTextField: View {
                     .foregroundColor(.secondary)
                 Spacer()
             }
-            TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+            TextField(placeholderText, text: $valueToBindTo)
                 .padding(isRequired == false ? 0 : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? 6 : 0)
                 .border(isRequired == false ? Color.clear : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? Color.red : Color.clear)
         }
+        .clearButton(text: $valueToBindTo)
     }
 }
