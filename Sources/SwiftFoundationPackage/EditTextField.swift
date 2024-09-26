@@ -14,6 +14,7 @@ public struct EditTextField: View {
     public var placeholderText: String = ""
     public var minLength: Int = 0
     public var isRequired: Bool = false
+    var showWarning: Bool = false
     @Binding public var valueToBindTo: String
     
     public init(title: String, placeholderText: String = "",valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false) {
@@ -31,6 +32,10 @@ public struct EditTextField: View {
                     .font(.caption2)
                     .foregroundColor(.secondary)
                 Spacer()
+                if showWarning {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(Color(.systemOrange))
+                }
             }
             TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
                 .padding(isRequired == false ? 0 : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? 6 : 0)
