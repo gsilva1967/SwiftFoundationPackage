@@ -17,12 +17,13 @@ public struct EditTextField: View {
     var showWarning: Bool = false
     @Binding public var valueToBindTo: String
     
-    public init(title: String, placeholderText: String = "",valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false) {
+    public init(title: String, placeholderText: String = "",valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, showWarning: Bool = false) {
         self.title = title
         self.placeholderText = placeholderText.isEmpty ? title : placeholderText
         self.minLength = minLength
         self._valueToBindTo = valueToBindTo
         self.isRequired = isRequired
+        self.showWarning = showWarning
     }
     
     public var body: some View {
