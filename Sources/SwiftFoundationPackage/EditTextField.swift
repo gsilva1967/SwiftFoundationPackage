@@ -43,6 +43,7 @@ public struct EditTextField: View {
                 if showWarning {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(Color(.systemOrange))
+                        .font(.subheadline)
                 }
             }
         }
