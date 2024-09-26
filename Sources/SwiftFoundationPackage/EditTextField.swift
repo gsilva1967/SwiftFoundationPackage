@@ -33,14 +33,18 @@ public struct EditTextField: View {
                     .font(.caption2)
                     .foregroundColor(.secondary)
                 Spacer()
+                
+            }
+            HStack{
+                TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                    .padding(isRequired == false ? 0 : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? 6 : 0)
+                    .border(isRequired == false ? Color.clear : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? Color.red : Color.clear)
+                Spacer()
                 if showWarning {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(Color(.systemOrange))
                 }
             }
-            TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
-                .padding(isRequired == false ? 0 : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? 6 : 0)
-                .border(isRequired == false ? Color.clear : valueToBindTo.isEmpty || (minLength != 0 && valueToBindTo.count < minLength) ? Color.red : Color.clear)
         }
         
     }
