@@ -45,6 +45,7 @@ public struct EditTextField: View {
             ZStack{
                 HStack{
                     TextField(placeholderText, text: $valueToBindTo)//.clearButton(text: $valueToBindTo)
+                        .foregroundColor(.secondary)
                         .padding(isValid ? 0 : 6)
                         .overlay( isValid ?
                                   nil
