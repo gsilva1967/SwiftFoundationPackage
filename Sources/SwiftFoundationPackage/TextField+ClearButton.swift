@@ -22,7 +22,7 @@ public struct ClearButton: ViewModifier {
                 .onTapGesture {
                     // Does nothing on purpose to deal with the tap of the button opens the picker
                 }
-                .overlay(content: {
+                .overlay(alignment: .trailing, content: {
                 Button {
                     text = ""
                 } label: {
