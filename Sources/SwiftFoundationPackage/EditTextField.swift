@@ -44,7 +44,7 @@ public struct EditTextField: View {
             }
             ZStack{
                 HStack{
-                    TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                    TextField(placeholderText, text: $valueToBindTo)//.clearButton(text: $valueToBindTo)
                         .padding(isValid ? 0 : 6)
                         .overlay( isValid ?
                                   nil
