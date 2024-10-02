@@ -20,6 +20,7 @@ public struct ClearButton: ViewModifier {
                 } label: {
                     Image(systemName: "multiply.circle.fill")
                         .foregroundStyle(.gray)
+                        .imageScale(.large)
                 }
                 .padding(.trailing, 4)
             }
