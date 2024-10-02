@@ -21,7 +21,7 @@ public struct ClearButton: ViewModifier {
                 } label: {
                     Image(systemName: "multiply.circle.fill")
                         .foregroundStyle(.gray)
-                        .padding(4)
+                        .padding(8)
                         
                 }
                 .padding(.trailing, 4)
