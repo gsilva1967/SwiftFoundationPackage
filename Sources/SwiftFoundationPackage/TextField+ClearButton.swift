@@ -15,6 +15,14 @@ public struct ClearButton: ViewModifier {
             content
 
             if !text.isEmpty {
+                HStack {
+                    Text(" ")
+                }
+                .clipShape(Rectangle())
+                .onTapGesture {
+                    // Does nothing on purpose to deal with the tap of the button opens the picker
+                }
+                .overlay(content: {
                 Button {
                     text = ""
                 } label: {
@@ -23,7 +31,10 @@ public struct ClearButton: ViewModifier {
                         
                 }
                 .padding(.trailing, 4)
-                .frame(width: 60 , height: 60)
+                .buttonStyle(PlainButtonStyle())
+                })
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .layoutPriority(1)
             }
         }
     }
