@@ -92,7 +92,14 @@ public struct EditTextField: View {
             self.validationMessage = "\(newTitle) is required.  \(minLength != 0 ? "Minimum length is \(minLength)." : "")".replacingOccurrences(of: "  ", with: " ")
         }
         
-        if(validationType == .alpha ){
+        switch validationType {
+        case .email:
+            let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+            if regex.firstMatch(in: valueToBindTo, options: [], range: NSRange(location: 0, length: valueToBindTo.count)) == nil {
+                self.isValid = false
+                self.validationMessage = "Please enter a valid email address."
+            }
+            case .alpha:
             let decimalCharacters = CharacterSet.decimalDigits
 
             let decimalRange = valueToBindTo.rangeOfCharacter(from: decimalCharacters)
@@ -101,9 +108,7 @@ public struct EditTextField: View {
                 self.isValid = false
                 self.validationMessage = "Please enter only letters.  No numbers or punctuation."
             }
-        }
-        
-        if(validationType == .numeric){
+        case .numeric:
             let letterCharacters = CharacterSet.letters
 
             let letterRange = valueToBindTo.rangeOfCharacter(from: letterCharacters)
@@ -112,18 +117,28 @@ public struct EditTextField: View {
                 self.isValid = false
                 self.validationMessage = "Please enter only numbers.  No letters."
             }
+            
+        case .regex(let regexString):
+            let regex = try! NSRegularExpression(pattern: regexString, options: .caseInsensitive)
+            if regex.firstMatch(in: valueToBindTo, options: [], range: NSRange(location: 0, length: valueToBindTo.count)) == nil {
+                self.isValid = false
+                self.validationMessage = "Please enter a valid email address."
+            }
+        case .none:
+         break
         }
-        
+       
         
     }
    
     
 }
 
-public enum EditFieldValidation: String, CaseIterable {
+public enum EditFieldValidation: Hashable {
     case none
     case numeric
     case alpha
-        
+    case email
+    case regex(String)
 }
 
