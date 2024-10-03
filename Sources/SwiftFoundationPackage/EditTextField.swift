@@ -47,7 +47,7 @@ public struct EditTextField: View {
                     TextField(placeholderText, text: $valueToBindTo) // .clearButton(text: $valueToBindTo)
                         .foregroundColor(.secondary)
                         .padding(isValid.1 ? 0 : 6)
-                        .overlay(isValid.1 && isValid.0 == title ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33)
+                        .overlay(isValid.1 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33)
                         )
                         .keyboardType(keyBoardType)
                         .onChange(of: valueToBindTo) {
