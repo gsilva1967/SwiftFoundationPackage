@@ -18,10 +18,10 @@ public struct EditTextField: View {
     public var validationType: EditFieldValidation = .none
     var showWarning: Bool = false
     @State var validationMessage: String
-    @State var isValid: Bool = true
+    @Binding public var isValid: (String, Bool)
     @Binding public var valueToBindTo: String
     
-    public init(title: String, placeholderText: String = "",valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false) {
+    public init(title: String, placeholderText: String = "",valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false,  isValid: Binding<(String, Bool)>? = .constant((.init(), true))) {
         self.title = title
         self.placeholderText = placeholderText.isEmpty ? title : placeholderText
         self.minLength = minLength
@@ -31,6 +31,7 @@ public struct EditTextField: View {
         self.keyBoardType = keyBoardType
         self.validationType = validationType
         self.validationMessage = ""
+        self._isValid = isValid!
     }
     
     public var body: some View {
@@ -46,8 +47,8 @@ public struct EditTextField: View {
                 HStack{
                     TextField(placeholderText, text: $valueToBindTo)//.clearButton(text: $valueToBindTo)
                         .foregroundColor(.secondary)
-                        .padding(isValid ? 0 : 6)
-                        .overlay( isValid ?
+                        .padding(isValid.1 ? 0 : 6)
+                        .overlay( isValid.1 ?
                                   nil
                                   :
                                     RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33)
@@ -64,30 +65,18 @@ public struct EditTextField: View {
                             .font(.subheadline)
                     }
                 }
-                
-//                if(self.validationMessage.count > 0){
-//                    HStack{
-//                        Text(validationMessage)
-//                        Spacer()
-//                    }
-//                    .foregroundColor(.white)
-//                    .padding(.horizontal, 5)
-//                    .padding(.vertical, 4)
-//                    .background(RoundedRectangle(cornerRadius: 13.0).fill(Color(.red).opacity(0.7)))
-//                    .offset(y: -34)
-//                }
+
             }
         }
-        
         
     }
     
     public func checkValidity() {
-        isValid = true
+        isValid = (title, true)
         self.validationMessage = ""
         
         if ((isRequired == true && valueToBindTo.count == 0) || (minLength != 0 && valueToBindTo.count < minLength)){
-            self.isValid = false
+            self.isValid.1 = false
             let newTitle = title.replacingOccurrences(of: "(required)", with: "")
             self.validationMessage = "\(newTitle) is required.  \(minLength != 0 ? "Minimum length is \(minLength)." : "")".replacingOccurrences(of: "  ", with: " ")
         }
@@ -96,7 +85,7 @@ public struct EditTextField: View {
         case .email:
             let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
             if regex.firstMatch(in: valueToBindTo, options: [], range: NSRange(location: 0, length: valueToBindTo.count)) == nil {
-                self.isValid = false
+                self.isValid.1 = false
                 self.validationMessage = "Please enter a valid email address."
             }
             case .alpha:
@@ -105,7 +94,7 @@ public struct EditTextField: View {
             let decimalRange = valueToBindTo.rangeOfCharacter(from: decimalCharacters)
 
             if decimalRange != nil {
-                self.isValid = false
+                self.isValid.1 = false
                 self.validationMessage = "Please enter only letters.  No numbers or punctuation."
             }
         case .numeric:
@@ -114,14 +103,14 @@ public struct EditTextField: View {
             let letterRange = valueToBindTo.rangeOfCharacter(from: letterCharacters)
 
             if letterRange != nil {
-                self.isValid = false
+                self.isValid.1 = false
                 self.validationMessage = "Please enter only numbers.  No letters."
             }
             
         case .regex(let regexString):
             let regex = try! NSRegularExpression(pattern: regexString, options: .caseInsensitive)
             if regex.firstMatch(in: valueToBindTo, options: [], range: NSRange(location: 0, length: valueToBindTo.count)) == nil {
-                self.isValid = false
+                self.isValid.1 = false
                 self.validationMessage = "Please enter a valid email address."
             }
         case .none:
