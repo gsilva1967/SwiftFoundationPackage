@@ -1,5 +1,5 @@
 //
-//  EditTextField2.swift
+//  EditTextField.swift
 //  MobileGoRecruit
 //
 //  Created by Michael Kacos on 10/1/24.
@@ -46,9 +46,8 @@ public struct EditTextField: View {
                 HStack {
                     TextField(placeholderText, text: $valueToBindTo) // .clearButton(text: $valueToBindTo)
                         .foregroundColor(.secondary)
-                        .padding(isValid.1 ? 0 : 6)
-                        .overlay(isValid.1 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33)
-                        )
+                        .padding(checkToValidate() ? 0 : 6)
+                        .overlay(checkToValidate() ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
                         .keyboardType(keyBoardType)
                         .onChange(of: valueToBindTo) {
                             checkValidity()
@@ -62,6 +61,13 @@ public struct EditTextField: View {
                 }
             }
         }
+    }
+
+    public func checkToValidate() -> Bool {
+        if isValid.0 != title && isValid.0 != "" {
+            return true
+        }
+        return isValid.1
     }
 
     public func checkValidity() {
