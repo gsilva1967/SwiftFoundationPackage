@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 17.0, *)
-public struct EditTextField: View {
+public struct EditTextField2: View {
     public var title: String
     public var placeholderText: String = ""
     public var minLength: Int = 0
@@ -18,6 +18,7 @@ public struct EditTextField: View {
     public var validationType: EditFieldValidation = .none
     var showWarning: Bool = false
     @State var validationMessage: String
+    @State var textIsValid: Bool = true
     @Binding public var isValid: (String, Bool)
     @Binding public var valueToBindTo: String
 
@@ -46,8 +47,8 @@ public struct EditTextField: View {
                 HStack {
                     TextField(placeholderText, text: $valueToBindTo) // .clearButton(text: $valueToBindTo)
                         .foregroundColor(.secondary)
-                        .padding(checkToValidate() ? 0 : 6)
-                        .overlay(checkToValidate() ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
+                        .padding(self.validationMessage.count == 0 ? 0 : 6)
+                        .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
                         .keyboardType(keyBoardType)
                         .onChange(of: valueToBindTo) {
                             checkValidity()
@@ -61,13 +62,6 @@ public struct EditTextField: View {
                 }
             }
         }
-    }
-
-    public func checkToValidate() -> Bool {
-        if isValid.0 != title && isValid.0 != "" {
-            return true
-        }
-        return isValid.1
     }
 
     public func checkValidity() {
@@ -114,6 +108,11 @@ public struct EditTextField: View {
         case .none:
             break
         }
+
+        if isValid.0 != title && isValid.0 != "" {
+            textIsValid = true
+        }
+        textIsValid = isValid.1
     }
 }
 
