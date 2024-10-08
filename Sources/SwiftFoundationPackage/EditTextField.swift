@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 17.0, *)
-public struct EditTextField2: View {
+public struct EditTextField: View {
     public var title: String
     public var placeholderText: String = ""
     public var minLength: Int = 0
