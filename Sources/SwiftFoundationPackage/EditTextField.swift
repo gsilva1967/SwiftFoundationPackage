@@ -68,7 +68,7 @@ public struct EditTextField: View {
         isValid = (title, true)
         validationMessage = ""
 
-        if (isRequired == true && valueToBindTo.count == 0) || (minLength != 0 && valueToBindTo.count < minLength) {
+        if (isRequired == true && valueToBindTo.count == 0) || (minLength != 0 && (valueToBindTo.count > 0 && valueToBindTo.count < minLength)) {
             isValid.1 = false
             let newTitle = title.replacingOccurrences(of: "(required)", with: "")
             validationMessage = "\(newTitle) is required.  \(minLength != 0 ? "Minimum length is \(minLength)." : "")".replacingOccurrences(of: "  ", with: " ")
@@ -114,6 +114,13 @@ public struct EditTextField: View {
         }
         textIsValid = isValid.1
     }
+
+//    public func checkToValidate()  {
+//        if isValid.0 != title && isValid.0 != "" {
+//            textIsValid = true
+//        }
+//        textIsValid = isValid.1
+//    }
 }
 
 public enum EditFieldValidation: Hashable {
