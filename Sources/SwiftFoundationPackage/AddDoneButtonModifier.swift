@@ -25,9 +25,7 @@ public struct doneButtonModifier: ViewModifier {
                     }
                 }
             }
-            .onTapGesture {
-                isFieldFocused = true
-            }
+           
     }
 }
 
