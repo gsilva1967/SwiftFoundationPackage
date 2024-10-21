@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 16.0, *)
 public struct doneButtonModifier: ViewModifier {
     @FocusState public var isFieldFocused: Bool
 
@@ -14,17 +15,20 @@ public struct doneButtonModifier: ViewModifier {
         content
             .focused($isFieldFocused)
             .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-
-                    Button("Done") {
-                        isFieldFocused = false
+                if isFieldFocused {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        
+                        Button("Done") {
+                            isFieldFocused = false
+                        }
                     }
                 }
             }
     }
 }
 
+@available(iOS 16.0, *)
 public extension View {
     func addDoneButton() -> some View {
         modifier(doneButtonModifier())
