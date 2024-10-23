@@ -19,12 +19,15 @@ public struct ClearButton: ViewModifier {
                 Button {
                     text = ""
                 } label: {
-                    Image(systemName: "multiply.circle.fill")
-                        .foregroundStyle(.gray)
-                        
+                    HStack{
+                        Spacer()
+                        Image(systemName: "multiply.circle.fill")
+                            .foregroundStyle(.gray)
+                    }
                         
                 }
                 .padding(.trailing, 4)
+                .contentShape(Rectangle())
                 
             }
         }
