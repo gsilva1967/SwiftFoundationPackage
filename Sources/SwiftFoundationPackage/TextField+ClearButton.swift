@@ -24,9 +24,10 @@ public struct ClearButton: ViewModifier {
                         Image(systemName: "multiply.circle.fill")
                             .foregroundStyle(.gray)
                     }
+                    .frame(width: 60, height:  .infinity)
                         
                 }
-                .padding(.trailing, 4)
+                //.padding(.trailing, 4)
                 .contentShape(Rectangle())
                 
             }
