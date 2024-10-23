@@ -45,7 +45,7 @@ public struct EditTextField: View {
             }
             ZStack {
                 HStack {
-                    TextField(placeholderText, text: $valueToBindTo) // .clearButton(text: $valueToBindTo)
+                    TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
                         .foregroundColor(.secondary)
                         .padding(self.validationMessage.count == 0 ? 0 : 6)
                         .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
