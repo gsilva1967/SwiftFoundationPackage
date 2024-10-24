@@ -17,12 +17,14 @@ public struct EditTextField: View {
     public var keyBoardType: UIKeyboardType = .default
     public var validationType: EditFieldValidation = .none
     var showWarning: Bool = false
+    var stacked: Bool = true
+
     @State var validationMessage: String
     @State var textIsValid: Bool = true
     @Binding public var isValid: (String, Bool)
     @Binding public var valueToBindTo: String
 
-    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true))) {
+    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true) {
         self.title = title
         self.placeholderText = placeholderText.isEmpty ? title : placeholderText
         self.minLength = minLength
@@ -33,32 +35,58 @@ public struct EditTextField: View {
         self.validationType = validationType
         self.validationMessage = ""
         self._isValid = isValid!
+        self.stacked = stacked
     }
 
     public var body: some View {
-        VStack {
+        if stacked {
+            VStack {
+                HStack {
+                    Text(self.validationMessage.count > 0 ? validationMessage : title)
+                        .font(.caption2)
+                        .foregroundColor(self.validationMessage.count > 0 ? .red : .primary)
+                    Spacer()
+                }
+                ZStack {
+                    HStack {
+                        TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                            .foregroundColor(.secondary)
+                            .padding(self.validationMessage.count == 0 ? 0 : 6)
+                            .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
+                            .keyboardType(keyBoardType)
+                            .onChange(of: valueToBindTo) {
+                                checkValidity()
+                            }
+                        Spacer()
+                        if showWarning {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(Color(.systemOrange))
+                                .font(.subheadline)
+                        }
+                    }
+                }
+            }
+        }
+        else {
             HStack {
                 Text(self.validationMessage.count > 0 ? validationMessage : title)
                     .font(.caption2)
                     .foregroundColor(self.validationMessage.count > 0 ? .red : .primary)
                 Spacer()
-            }
-            ZStack {
-                HStack {
-                    TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
-                        .foregroundColor(.secondary)
-                        .padding(self.validationMessage.count == 0 ? 0 : 6)
-                        .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
-                        .keyboardType(keyBoardType)
-                        .onChange(of: valueToBindTo) {
-                            checkValidity()
-                        }
-                    Spacer()
-                    if showWarning {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .foregroundColor(Color(.systemOrange))
-                            .font(.subheadline)
+
+                TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                    .foregroundColor(.secondary)
+                    .padding(self.validationMessage.count == 0 ? 0 : 6)
+                    .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
+                    .keyboardType(keyBoardType)
+                    .onChange(of: valueToBindTo) {
+                        checkValidity()
                     }
+
+                if showWarning {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(Color(.systemOrange))
+                        .font(.subheadline)
                 }
             }
         }
