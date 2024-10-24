@@ -71,6 +71,7 @@ public struct EditTextField: View {
             HStack {
                 Text(self.validationMessage.count > 0 ? validationMessage : title)
                     .foregroundColor(self.validationMessage.count > 0 ? .red : .primary)
+                    .frame(width: 130, alignment: .leading)
                 
                 Spacer()
 
