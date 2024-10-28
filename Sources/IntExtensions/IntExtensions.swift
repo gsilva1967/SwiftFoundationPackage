@@ -17,7 +17,7 @@ public extension Int {
     
 }
 
-public extension Int? {
+public extension Optional where Wrapped == Int {
     var makeEmptyIfNil: String {
         if self == nil {
             return ""
@@ -28,5 +28,12 @@ public extension Int? {
     
     var displayOptionalText: String {
         return makeEmptyIfNil
+    }
+    
+    var isNilOrZero: Bool {
+        if(self == nil || self == 0){
+            return true
+        }
+        return false
     }
 }
