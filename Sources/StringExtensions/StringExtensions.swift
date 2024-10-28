@@ -124,6 +124,10 @@ public extension Optional where Wrapped == String {
         }
         return UIImage()
     }
+    
+    var isBlank: Bool {
+        return self?.isBlank ?? true
+    }
 }
 
 public extension String {
@@ -136,5 +140,9 @@ public extension String {
     var isNumber: Bool {
         let digitsCharacters = CharacterSet(charactersIn: "0123456789")
         return CharacterSet(charactersIn: self).isSubset(of: digitsCharacters)
+    }
+    
+    var isBlank: Bool {
+        return allSatisfy { $0.isWhitespace }
     }
 }
