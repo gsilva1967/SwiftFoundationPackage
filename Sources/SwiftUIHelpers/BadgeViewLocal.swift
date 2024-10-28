@@ -16,7 +16,7 @@ public struct BadgeViewLocal: View {
     @State public var background: Color = .red
     @State public var usePosition: Bool = true
 
-    private let size = 20.0
+    public let size = 20.0
 
     public var body: some View {
         ZStack {
