@@ -217,9 +217,19 @@ public extension Date {
 //        }
 //        
 
-        let date = dateFormatter.date(from: dateString as String)
-
-        return date!
+//        let date = dateFormatter.date(from: dateString as String)
+//
+//        return date!
+        if let date = dateFormatter.date(from: dateString as String) {
+                    return date
+                } else {
+//                    let exception = NSException(name: NSExceptionName(rawValue: "Unknown Date Format \(dateString)"),
+//                                                reason: dateString,
+//                                                userInfo: nil)
+                   
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    return dateFormatter.date(from: "1970-01-01")!
+                }
     }
 
     /**
