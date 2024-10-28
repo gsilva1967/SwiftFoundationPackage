@@ -465,6 +465,29 @@ public extension Date {
             return false
         }
     }
+    
+    func isWithinLastNDays(daysBack: Int) -> Bool {
+        let calendar = Calendar.current
+        let now = Date()
+        let nDaysAgo = calendar.date(byAdding: .day, value: -daysBack, to: now)
+        return self >= (nDaysAgo ?? now)
+    }
+
+    var minute: Int { Calendar.current.component(.minute, from: self) }
+    var nextHalfHour: Date {
+        Calendar.current.nextDate(after: self, matching: DateComponents(minute: minute >= 30 ? 0 : 30), matchingPolicy: .strict)!
+    }
+
+
+
+    func nextFullHour() -> Date? {
+        let calendar = Calendar.current
+        let date = Date()
+        let minuteComponent = calendar.component(.minute, from: date)
+        var components = DateComponents()
+        components.minute = 60 - minuteComponent
+        return calendar.date(byAdding: components, to: date)
+    }
 }
 
 extension Locale {
