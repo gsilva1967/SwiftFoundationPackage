@@ -44,13 +44,13 @@ public struct EditTextField: View {
                 HStack {
                     Text(self.validationMessage.count > 0 ? validationMessage : title)
                         .font(.caption2)
-                        .foregroundColor(self.validationMessage.count > 0 ? .red : .primary)
+                        .foregroundColor(self.validationMessage.count > 0 ? .red : .secondary)
                     Spacer()
                 }
                 ZStack {
                     HStack {
                         TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.primary)
                             .padding(self.validationMessage.count == 0 ? 0 : 6)
                             .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
                             .keyboardType(keyBoardType)
@@ -70,13 +70,13 @@ public struct EditTextField: View {
         else {
             HStack {
                 Text(self.validationMessage.count > 0 ? validationMessage : title)
-                    .foregroundColor(self.validationMessage.count > 0 ? .red : .primary)
+                    .foregroundColor(self.validationMessage.count > 0 ? .red : .secondary)
                     .frame(width: 130, alignment: .leading)
                 
                 Spacer()
 
                 TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.primary)
                     .padding(self.validationMessage.count == 0 ? 0 : 6)
                     .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
                     .keyboardType(keyBoardType)
