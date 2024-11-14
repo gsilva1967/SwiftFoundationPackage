@@ -106,6 +106,11 @@ public enum DateComponentEnum {
  */
 public extension Date {
     func formatDate(format: DateFormat, uselocalDateTimeFormatter: Bool = false, ignoreDeviceTimeFormat: Bool = false) -> String {
+        let calendarDate = Calendar.current.dateComponents([.day, .year, .month], from: self)
+        if(calendarDate.month == 1 && calendarDate.day == 1 && calendarDate.year == 1970){
+            return "n/a"
+        }
+        
         let formatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter()
         if format.rawValue.range(of: "h:", options: .caseInsensitive) != nil  && ignoreDeviceTimeFormat == false {
             
@@ -125,6 +130,11 @@ public extension Date {
     }
     
     func formatDateIgnoreTimeZone(format: DateFormat, ignoreDeviceTimeFormat: Bool = false) -> String {
+        let calendarDate = Calendar.current.dateComponents([.day, .year, .month], from: self)
+        if(calendarDate.month == 1 && calendarDate.day == 1 && calendarDate.year == 1970){
+            return "n/a"
+        }
+        
         let formatter = DateFormatter()
         formatter.dateFormat = format.rawValue
         if format.rawValue.range(of: "h:", options: .caseInsensitive) != nil && ignoreDeviceTimeFormat == false{
