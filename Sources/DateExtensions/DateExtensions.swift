@@ -106,8 +106,9 @@ public enum DateComponentEnum {
  */
 public extension Date {
     func formatDate(format: DateFormat, uselocalDateTimeFormatter: Bool = false, ignoreDeviceTimeFormat: Bool = false) -> String {
-        let calendarDate = Calendar.current.dateComponents([.day, .year, .month], from: self)
-        if(calendarDate.month == 1 && calendarDate.day == 1 && calendarDate.year == 1970){
+        //if the date is 1/1/1970 return n/a
+        if (self.timeIntervalSinceReferenceDate == -978307200.0)
+        {
             return "n/a"
         }
         
@@ -130,8 +131,9 @@ public extension Date {
     }
     
     func formatDateIgnoreTimeZone(format: DateFormat, ignoreDeviceTimeFormat: Bool = false) -> String {
-        let calendarDate = Calendar.current.dateComponents([.day, .year, .month], from: self)
-        if(calendarDate.month == 1 && calendarDate.day == 1 && calendarDate.year == 1970){
+        //if the date is 1/1/1970 return n/a
+        if (self.timeIntervalSinceReferenceDate == -978307200.0)
+        {
             return "n/a"
         }
         
