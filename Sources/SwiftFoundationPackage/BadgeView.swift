@@ -18,6 +18,19 @@ public struct BadgeView : View {
     @State public var usePosition: Bool = true
 
     private let size = 20.0
+    
+    public init(value: Binding<Int>? , x: Double = 30.0, y: Double = 4.0, foreground: Color = .white, background: Color = .red, usePosition: Bool = true) {
+        self._value = value!
+        self.x = x
+        self.y = y
+        self.foreground = foreground
+        self.background = background
+        self.usePosition = usePosition
+        
+    }
+    
+    
+    
 
     public var body: some View {
         ZStack {
