@@ -35,3 +35,20 @@ public extension Double {
         return Measurement(value: self, unit: originalUnit).converted(to: convertedUnit).value
     }
 }
+
+public extension Optional where Wrapped == Double {
+    /**
+     Returns if the string is nil or empty
+
+     - author: Michael Kacos
+     - returns: Bool
+
+     */
+    var isNilOrZero: Bool {
+        if self == nil || self == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
