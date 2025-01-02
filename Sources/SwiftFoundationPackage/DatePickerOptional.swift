@@ -16,7 +16,7 @@ public struct DatePickerOptional: View {
     @State var yearsToStartBack: Int = 0
     @State var showDatePicker: Bool = false
     
-   public init(placeholderText: String, title: String, showWarning: Bool = false, dateToBindTo: Binding<Date?>?, yearsToStartBack: Int, showDatePicker: Bool = false) {
+   public init(placeholderText: String, title: String, showWarning: Bool = false, dateToBindTo: Binding<Date?>?, yearsToStartBack: Int = 0, showDatePicker: Bool = false) {
         self.placeholderText = placeholderText
         self.title = title
         self.showWarning = showWarning
