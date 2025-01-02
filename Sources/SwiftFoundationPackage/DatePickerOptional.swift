@@ -15,6 +15,15 @@ public struct DatePickerOptional: View {
     @Binding var dateToBindTo: Date?
     @State var yearsToStartBack: Int = 0
     @State var showDatePicker: Bool = false
+    
+    init(placeholderText: String, title: String, showWarning: Bool, dateToBindTo: Binding<Date?>?, yearsToStartBack: Int, showDatePicker: Bool) {
+        self.placeholderText = placeholderText
+        self.title = title
+        self.showWarning = showWarning
+        self._dateToBindTo = dateToBindTo!
+        self.yearsToStartBack = yearsToStartBack
+        self.showDatePicker = showDatePicker
+    }
 
    public var body: some View {
         if dateToBindTo == nil {
