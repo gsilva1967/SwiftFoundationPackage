@@ -8,14 +8,6 @@
 import SwiftUI
 
 public struct BadgeView : View {
-    public init(value: Binding<Int>, x: Double = 30.0, y: Double = 4.0, foreground: Color = .white, background: Color = .red) {
-        self._value = value
-        self.x = x
-        self.y = y
-        self.foreground = foreground
-        self.background = background
-    }
-    
     
     @Binding public var value: Int
     
@@ -23,27 +15,45 @@ public struct BadgeView : View {
     @State public var y = 4.0
     @State public var foreground: Color = .white
     @State public var background: Color = .red
-    
+    @State public var usePosition: Bool = true
+
     private let size = 20.0
-    
-   public var body: some View {
+
+    public var body: some View {
         ZStack {
-            Capsule()
-                .fill(background)
-                .frame(width: size * widthMultplier(), height: size, alignment: .topTrailing)
-                .position(x: x, y: y)
-            
-            if hasTwoOrLessDigits() {
-                Text("\(value)")
-                    .foregroundColor(foreground)
-                    .font(Font.caption)
+            if usePosition {
+                Capsule()
+                    .fill(background)
+                    .frame(width: size * widthMultplier(), height: size, alignment: .trailing)
                     .position(x: x, y: y)
+
+                if hasTwoOrLessDigits() {
+                    Text("\(value)")
+                        .foregroundColor(foreground)
+                        .font(Font.caption)
+                        .position(x: x, y: y)
+                } else {
+                    Text("99+")
+                        .foregroundColor(foreground)
+                        .font(Font.caption)
+                        .frame(width: size * widthMultplier(), height: size, alignment: .center)
+                        .position(x: x, y: y)
+                }
             } else {
-                Text("99+")
-                    .foregroundColor(foreground)
-                    .font(Font.caption)
-                    .frame(width: size * widthMultplier(), height: size, alignment: .center)
-                    .position(x: x, y: y)
+                Capsule()
+                    .fill(background)
+                    .frame(width: size * widthMultplier(), height: size, alignment: .trailing)
+
+                if hasTwoOrLessDigits() {
+                    Text("\(value)")
+                        .foregroundColor(foreground)
+                        .font(Font.caption)
+                } else {
+                    Text("99+")
+                        .foregroundColor(foreground)
+                        .font(Font.caption)
+                        .frame(width: size * widthMultplier(), height: size, alignment: .center)
+                }
             }
         }
         .opacity(value == 0 ? 0 : 1)
