@@ -18,4 +18,12 @@ public struct MapLocation: Identifiable {
     public var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
+    
+    public init(name: String, latitude: Double, longitude: Double, address: String, imageName: String) {
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.address = address
+        self.imageName = imageName
+    }
 }
