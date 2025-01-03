@@ -10,6 +10,10 @@ import SwiftUI
 
 public struct ImagePicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
+    
+    public init(image: Binding<UIImage?>? = nil) {
+        self._image = image!
+    }
 
     public func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
