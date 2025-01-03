@@ -149,6 +149,6 @@ public enum Global {
 }
 
 public struct CursorPosition {
-    var start: Int
-    var end: Int
+    public var start: Int
+    public var end: Int
 }
