@@ -119,7 +119,7 @@ public struct EditText: View {
 
     @State public var showingPlaceholder = false
 
-    init(_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil) {
+    public init(_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil) {
         self.placeholder = placeholder
         self.onCommit = onCommit
         self.onFocused = onFocused
@@ -144,7 +144,7 @@ public struct EditText: View {
     }
 }
 
-enum Global {
+public enum Global {
     public static var cursorPosition = CursorPosition(start: 0, end: 0)
 }
 
