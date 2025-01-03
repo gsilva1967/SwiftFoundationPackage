@@ -15,7 +15,15 @@ public struct DatePickerWheelControl: View {
     @Binding var dateToBind: Date
     @State var showDatePicker = false
     
-    init(title: String, startDate: Date, endDate: Date, foregroundColor: Color, dateToBind: Binding<Date>?, showDatePicker: Bool = false) {
+    public init(title: String, startDate: Date, endDate: Date,  dateToBind: Binding<Date>?, showDatePicker: Bool = false) {
+        self.title = title
+        self.startDate = startDate
+        self.endDate = endDate
+        self._dateToBind = dateToBind!
+        self.showDatePicker = showDatePicker
+    }
+    
+    public init(title: String, startDate: Date, endDate: Date, foregroundColor: Color, dateToBind: Binding<Date>?, showDatePicker: Bool = false) {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
