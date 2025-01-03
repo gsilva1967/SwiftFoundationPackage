@@ -130,6 +130,7 @@ public extension Date {
         return formatter.string(from: self)
     }
     
+    
     func formatDateIgnoreTimeZone(format: DateFormat, ignoreDeviceTimeFormat: Bool = false) -> String {
         //if the date is 1/1/1970 return n/a
         if (self.timeIntervalSinceReferenceDate == -978307200.0)
