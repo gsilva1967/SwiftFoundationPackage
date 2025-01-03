@@ -65,7 +65,7 @@ let package = Package(
         ),
         .target(
             name: "SwiftFoundationPackage",
-            dependencies: []
+            dependencies: ["DateExtensions"]
         ),
 //        .testTarget(
 //            name: "SwiftFoundationPackageTests",
