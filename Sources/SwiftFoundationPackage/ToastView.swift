@@ -28,7 +28,7 @@ public struct ToastView: View {
     @State var corner: CGFloat = 30
     @State var showTechnicalDetails: Bool = false
 
-    public init(toastType: ToastType, isShortSuccess: Bool, title: String = "", details: String, technicalDetails: String = "", animateCircle: Bool = false, icon: Image, gridentColor: Color, circleAColor: Color, corner: CGFloat, showTechnicalDetails: Bool) {
+    public init(toastType: ToastType, isShortSuccess: Bool = true, title: String = "", details: String, technicalDetails: String = "", animateCircle: Bool = false, icon: Image = .init(systemName: "checkmark.circle.fill"), gridentColor: Color = .green, circleAColor: Color = .green, corner: CGFloat = 30, showTechnicalDetails: Bool = false) {
         self.toastType = toastType
         self.isShortSuccess = isShortSuccess
         self.title = title
