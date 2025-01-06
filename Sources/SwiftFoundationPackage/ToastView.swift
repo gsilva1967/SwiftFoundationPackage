@@ -177,59 +177,59 @@ public struct ToastView: View {
     }
 
     public func setColors() {
-        switch toastType {
+        switch self.toastType {
         case .Success:
-            icon = Image(systemName: "checkmark.circle.fill")
-            gridentColor = Color("successToast", bundle: .main)
-            circleAColor = Color("successToast", bundle: .main)
+            self.icon = Image(systemName: "checkmark.circle.fill")
+            self.gridentColor = Color("successToast", bundle: .main)
+            self.circleAColor = Color("successToast", bundle: .main)
 
         case .Warning:
-            icon = Image(systemName: "exclamationmark.circle.fill")
-            gridentColor = Color("warningToast", bundle: .main)
-            circleAColor = Color("warningToast", bundle: .main)
+            self.icon = Image(systemName: "exclamationmark.circle.fill")
+            self.gridentColor = Color("warningToast", bundle: .main)
+            self.circleAColor = Color("warningToast", bundle: .main)
 
         case .Failure:
-            icon = Image(systemName: "exclamationmark.circle.fill")
-            gridentColor = Color("errorToast", bundle: .main)
-            circleAColor = Color("errorToast", bundle: .main)
+            self.icon = Image(systemName: "exclamationmark.circle.fill")
+            self.gridentColor = Color("errorToast", bundle: .main)
+            self.circleAColor = Color("errorToast", bundle: .main)
 
         case .Offline:
-            icon = Image(systemName: "wifi.exclamationmark.circle.fill")
-            gridentColor = Color("disconnectedBackground", bundle: .main)
-            circleAColor = Color("disconnectedBackground", bundle: .main)
+            self.icon = Image(systemName: "wifi.exclamationmark.circle.fill")
+            self.gridentColor = Color("disconnectedBackground", bundle: .main)
+            self.circleAColor = Color("disconnectedBackground", bundle: .main)
         }
     }
 
     public func setTitle() {
-        if title.isBlank {
-            switch toastType {
+        if self.title.isBlank {
+            switch self.toastType {
             case .Success:
-                title = "Success"
+                self.title = "Success"
 
             case .Warning:
-                title = "Warning"
+                self.title = "Warning"
 
             case .Failure:
-                title = "Failure"
+                self.title = "Failure"
 
             case .Offline:
-                title = "Offline"
+                self.title = "Offline"
             }
         }
     }
 
     public func getHeight() -> CGFloat {
-        var rtnVal = (details.count / 40) > 1 ? Double((details.count / 40) * 62) : 200.0
-        if toastType == .Success && isShortSuccess {
+        var rtnVal = (self.details.count / 40) > 1 ? Double((self.details.count / 40) * 62) : 200.0
+        if self.toastType == .Success && self.isShortSuccess {
             rtnVal = 60
         }
 
-        if technicalDetails.isBlank == false {
+        if self.technicalDetails.isBlank == false {
             rtnVal = rtnVal + 60
         }
 
-        if showTechnicalDetails {
-            rtnVal = rtnVal + Double((technicalDetails.count / 40) * 30)
+        if self.showTechnicalDetails {
+            rtnVal = rtnVal + Double((self.technicalDetails.count / 40) * 30)
         }
 
         return rtnVal
