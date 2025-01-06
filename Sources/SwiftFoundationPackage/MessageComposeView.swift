@@ -20,6 +20,14 @@ public struct MessageComposeView: UIViewControllerRepresentable {
     let fileAttachments: [URL]?
     let imageAttachments: [UIImage]?
     let completion: Completion?
+    
+    public init(recipients: [String]?, body: String?, fileAttachments: [URL]?, imageAttachments: [UIImage]?, completion: Completion?) {
+        self.recipients = recipients
+        self.body = body
+        self.fileAttachments = fileAttachments
+        self.imageAttachments = imageAttachments
+        self.completion = completion
+    }
 
     public func makeUIViewController(context: Context) -> UIViewController {
         guard Self.canSendText else {
