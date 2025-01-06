@@ -35,10 +35,7 @@ let package = Package(
             name: "SwiftFoundationPackage",
             targets: ["SwiftFoundationPackage"]
         ),
-        .library(
-            name: "Resources",
-            targets: ["Resources"]
-        ),
+        
       
     ],
     dependencies: [
@@ -69,12 +66,8 @@ let package = Package(
             dependencies: []
         ),
         .target(
-            name: "Resources",
-            dependencies: []
-        ),
-        .target(
             name: "SwiftFoundationPackage",
-            dependencies: ["DateExtensions", "StringExtensions", "Resources"]
+            dependencies: ["DateExtensions", "StringExtensions"]
         ),
 //        .testTarget(
 //            name: "SwiftFoundationPackageTests",
