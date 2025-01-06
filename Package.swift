@@ -35,6 +35,7 @@ let package = Package(
             name: "SwiftFoundationPackage",
             targets: ["SwiftFoundationPackage"]
         ),
+      
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
