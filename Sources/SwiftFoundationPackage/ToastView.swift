@@ -178,19 +178,19 @@ public struct ToastView: View {
         switch toastType {
         case .Success:
             icon = Image(systemName: "checkmark.circle.fill")
-            circleAColor = .successToast
+            circleAColor = Color("successToast", module: .main)
 
         case .Warning:
             icon = Image(systemName: "exclamationmark.circle.fill")
-            circleAColor = .warningToast
+            circleAColor = Color("warningToast", module: .main)
 
         case .Failure:
             icon = Image(systemName: "exclamationmark.circle.fill")
-            circleAColor = .errorToast
+            circleAColor = Color("errorToast", module: .main)
 
         case .Offline:
             icon = Image(systemName: "wifi.exclamationmark.circle.fill")
-            circleAColor = .disconnectedBackground
+            circleAColor = Color("disconnectedBackground", module: .main)
         }
     }
 
