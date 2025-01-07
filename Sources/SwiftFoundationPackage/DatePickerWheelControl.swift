@@ -9,27 +9,24 @@ import SwiftUI
 
 public struct DatePickerWheelControl: View {
     var title: String
-    var startDate: Date = Date().addToDate(date: Date(), dateComponent: .year, interval: -100)
-    var endDate: Date = Date().addToDate(date: Date(), dateComponent: .year, interval: 100)
-    var foregroundColor: Color = Color(red: 107.0, green: 107.0, blue: 112.0)
+    var startDate: Date = .init().addToDate(date: Date(), dateComponent: .year, interval: -100)
+    var endDate: Date = .init().addToDate(date: Date(), dateComponent: .year, interval: 100)
+    var foregroundColor: Color = .init(red: 107.0, green: 107.0, blue: 112.0)
     @Binding var dateToBind: Date
-    @State var showDatePicker = false
-    
-    public init(title: String, startDate: Date, endDate: Date,  dateToBind: Binding<Date>?, showDatePicker: Bool = false) {
+
+    public init(title: String, startDate: Date, endDate: Date, dateToBind: Binding<Date>?) {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
         self._dateToBind = dateToBind!
-        self.showDatePicker = showDatePicker
     }
-    
-    public init(title: String, startDate: Date, endDate: Date, foregroundColor: Color, dateToBind: Binding<Date>?, showDatePicker: Bool = false) {
+
+    public init(title: String, startDate: Date, endDate: Date, foregroundColor: Color, dateToBind: Binding<Date>?) {
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
         self.foregroundColor = foregroundColor
         self._dateToBind = dateToBind!
-        self.showDatePicker = showDatePicker
     }
 
     public var body: some View {
@@ -37,26 +34,19 @@ public struct DatePickerWheelControl: View {
             HStack {
                 Text(title)
 
-                Spacer()
-                Text("\(dateToBind.formatDate(format: .shortDate))")
-                Image(systemName: "chevron.right")
+//                Spacer()
+//                Text("\(dateToBind.formatDate(format: .shortDate))")
+//                Image(systemName: "chevron.right")
             }
             .foregroundColor(foregroundColor)
             .contentShape(Rectangle())
-            .onTapGesture(perform: {
-                showDatePicker.toggle()
-            })
 
-            if showDatePicker {
-                HStack {
-                    DatePicker("", selection: $dateToBind, in: startDate ... endDate, displayedComponents: .date)
-                        .datePickerStyle(.wheel)
-                        .foregroundColor(foregroundColor)
-                        .environment(\.timeZone, TimeZone(secondsFromGMT: 0)!)
-                }
+            HStack {
+                DatePicker("", selection: $dateToBind, in: startDate ... endDate, displayedComponents: .date)
+                    .datePickerStyle(.wheel)
+                    .foregroundColor(foregroundColor)
+                    .environment(\.timeZone, TimeZone(secondsFromGMT: 0)!)
             }
         }
     }
 }
-
-
