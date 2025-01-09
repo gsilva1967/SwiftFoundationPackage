@@ -11,10 +11,10 @@ public struct BadgeView : View {
     
     @Binding public var value: Int
     
-    @State public var x = 22.0
-    @State public var y = 2.0
-    @State public var foreground: Color = .white
-    @State public var background: Color = .red
+    public var x = 22.0
+    public var y = 2.0
+    public var foreground: Color = .white
+    public var background: Color = .red
     public var usePosition: Bool = false
 
     private let size = 20.0
