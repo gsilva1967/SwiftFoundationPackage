@@ -15,7 +15,7 @@ public struct BadgeView : View {
     @State public var y = 4.0
     @State public var foreground: Color = .white
     @State public var background: Color = .red
-    @State public var usePosition: Bool = false
+    public var usePosition: Bool = false
 
     private let size = 20.0
     
