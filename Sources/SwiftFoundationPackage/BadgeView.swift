@@ -11,7 +11,7 @@ public struct BadgeView : View {
     
     @Binding public var value: Int
     
-    @State public var x = 30.0
+    @State public var x = 24.0
     @State public var y = 4.0
     @State public var foreground: Color = .white
     @State public var background: Color = .red
