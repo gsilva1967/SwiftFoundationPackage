@@ -7,10 +7,11 @@
 import SwiftUI
 import UIKit
 
-struct TextfieldWithDone: UIViewRepresentable {
+public struct TextfieldWithDone: UIViewRepresentable {
     @Binding var text: String
     var keyType: UIKeyboardType
-    func makeUIView(context: Context) -> UITextField {
+    
+    public func makeUIView(context: Context) -> UITextField {
         let textfield = UITextField()
       textfield.keyboardType = keyType
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textfield.frame.size.width, height: 44))
@@ -21,7 +22,7 @@ struct TextfieldWithDone: UIViewRepresentable {
         return textfield
     }
     
-    func updateUIView(_ uiView: UITextField, context: Context) {
+    public func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
         
     }
