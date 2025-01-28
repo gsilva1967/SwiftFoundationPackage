@@ -25,6 +25,9 @@ public struct doneButtonModifier: ViewModifier {
                     }
                 }
             }
+            .onAppear {
+                isFieldFocused = false
+            }
            
     }
 }
