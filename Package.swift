@@ -17,7 +17,7 @@ let package = Package(
         ),
         .library(
             name: "StringExtensions",
-            targets: ["StringExtensions", "DateExtensions"]
+            targets: ["StringExtensions"]
         ),
         .library(
             name: "SwiftUIHelpers",
@@ -51,7 +51,7 @@ let package = Package(
         ),
         .target(
             name: "StringExtensions",
-            dependencies: []
+            dependencies: ["DateExtensions"]
         ),
         .target(
             name: "SwiftUIHelpers",
