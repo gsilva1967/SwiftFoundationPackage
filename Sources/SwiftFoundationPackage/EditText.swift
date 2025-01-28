@@ -16,6 +16,7 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
     var onDone: (() -> Void)?
     var onFocused: (() -> Void)?
     var onChangeValue: (() -> Void)?
+    var keyBoardType: UIKeyboardType
 
     public func makeUIView(context: UIViewRepresentableContext<UITextViewWrapperForInsert>) -> UITextView {
         let textField = UITextView()
@@ -31,6 +32,12 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
             textField.returnKeyType = .done
         }
 
+        textField.keyboardType = keyBoardType
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
+        toolBar.items = [doneButton]
+        toolBar.setItems([doneButton], animated: true)
+        textField.inputAccessoryView = toolBar
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
     }
@@ -55,12 +62,14 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
         var onDone: (() -> Void)?
         var onFocused: (() -> Void)?
         var onChangeValue: (() -> Void)?
+        var keyBoardType: UIKeyboardType
 
-        init(text: Binding<String>, onDone: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil) {
+        init(text: Binding<String>, onDone: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil, keyBoardType: UIKeyboardType = .default) {
             self.text = text
             self.onDone = onDone
             self.onFocused = onFocused
             self.onChangeValue = onChangeValue
+            self.keyBoardType = keyBoardType
         }
 
         public func textViewDidChange(_ uiView: UITextView) {
@@ -108,6 +117,7 @@ public struct EditText: View {
     public var onCommit: (() -> Void)?
     var onFocused: (() -> Void)?
     var onChangeValue: (() -> Void)?
+    var keyBoardType: UIKeyboardType
 
     @Binding public var text: String
     public var internalText: Binding<String> {
@@ -119,17 +129,19 @@ public struct EditText: View {
 
     @State public var showingPlaceholder = false
 
-    public init(_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil) {
+    public init(_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil, keyBoardType: UIKeyboardType = .default) {
         self.placeholder = placeholder
         self.onCommit = onCommit
         self.onFocused = onFocused
         self.onChangeValue = onChangeValue
+        self.keyBoardType = keyBoardType
         _text = text
         _showingPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
+        
     }
 
     public var body: some View {
-        UITextViewWrapperForInsert(text: internalText, onDone: onCommit, onFocused: onFocused, onChangeValue: onChangeValue)
+        UITextViewWrapperForInsert(text: internalText, onDone: onCommit, onFocused: onFocused, onChangeValue: onChangeValue, keyBoardType: keyBoardType)
             .background(placeholderView, alignment: .topLeading)
     }
 
@@ -151,4 +163,11 @@ public enum Global {
 public struct CursorPosition {
     public var start: Int
     public var end: Int
+}
+
+extension  UITextView{
+    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
+       self.resignFirstResponder()
+    }
+
 }
