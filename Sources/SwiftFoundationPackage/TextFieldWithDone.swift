@@ -11,6 +11,11 @@ public struct TextfieldWithDone: UIViewRepresentable {
     @Binding var text: String
     var keyType: UIKeyboardType
     
+    public init(text: Binding<String>, keyType: UIKeyboardType = .default) {
+        self._text = text
+        self.keyType = keyType
+    }
+    
     public func makeUIView(context: Context) -> UITextField {
         let textfield = UITextField()
       textfield.keyboardType = keyType
