@@ -35,7 +35,8 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
         textField.keyboardType = keyBoardType
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
-        toolBar.items = [doneButton]
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.items = [flexSpace, doneButton]
         toolBar.setItems([doneButton], animated: true)
         textField.inputAccessoryView = toolBar
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
