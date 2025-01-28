@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import DateExtensions
 /**
  Extenstions for Strings
 
@@ -15,6 +16,24 @@ import UIKit
 
  */
 public extension Optional where Wrapped == String {
+    
+    /**
+     Determines if the string is numeric
+
+     - author: Michael Kacos
+     - returns: String
+
+     */
+    func getFormattedDateString(format: DateFormat, uselocalDateTimeFormatter: Bool = false, ignoreDeviceTimeFormat: Bool = false) -> String {
+        var returnVal = "n/a"
+        if self != nil {
+            let dateFromString = Date().getDateFromString(dateString: self!)
+            returnVal = dateFromString.formatDate(format: format, uselocalDateTimeFormatter: uselocalDateTimeFormatter, ignoreDeviceTimeFormat: ignoreDeviceTimeFormat)
+        }
+        
+        return returnVal
+    }
+    
     /**
      Determines if the string is numeric
 
