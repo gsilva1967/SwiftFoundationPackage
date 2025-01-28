@@ -51,7 +51,7 @@ let package = Package(
         ),
         .target(
             name: "StringExtensions",
-            dependencies: []
+            dependencies: ["DateExtensions"]
         ),
         .target(
             name: "SwiftUIHelpers",
