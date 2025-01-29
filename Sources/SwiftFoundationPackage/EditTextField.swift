@@ -18,6 +18,7 @@ public struct EditTextField: View {
     public var validationType: EditFieldValidation = .none
     var showWarning: Bool = false
     var stacked: Bool = true
+    var titleColor: Color = .secondary
 
     @State var validationMessage: String
     @State var textIsValid: Bool = true
@@ -25,7 +26,7 @@ public struct EditTextField: View {
     @Binding public var valueToBindTo: String
     @FocusState public var isFieldFocused: Bool
 
-    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true) {
+    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true, titleColor: Color = .secondary) {
         self.title = title
         self.placeholderText = placeholderText.isEmpty ? title : placeholderText
         self.minLength = minLength
@@ -38,6 +39,7 @@ public struct EditTextField: View {
         self._isValid = isValid!
         self.stacked = stacked
         self.isFieldFocused = false
+        self.titleColor = titleColor
     }
 
     public var body: some View {
@@ -46,7 +48,7 @@ public struct EditTextField: View {
                 HStack {
                     Text(self.validationMessage.count > 0 ? validationMessage : title)
                         .font(.caption2)
-                        .foregroundColor(self.validationMessage.count > 0 ? .red : .secondary)
+                        .foregroundColor(self.validationMessage.count > 0 ? .red : titleColor)
                     Spacer()
                 }
                 ZStack {
@@ -85,13 +87,14 @@ public struct EditTextField: View {
         else {
             HStack {
                 Text(self.validationMessage.count > 0 ? validationMessage : title)
-                    .foregroundColor(self.validationMessage.count > 0 ? .red : .secondary)
-                    .frame(width: 130, alignment: .leading)
+                    .foregroundColor(self.validationMessage.count > 0 ? .red : titleColor)
+                    
                 
                 Spacer()
 
-                TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                TextField(placeholderText, text: $valueToBindTo)
                     .focused($isFieldFocused)
+                    .multilineTextAlignment(.trailing)
                     .toolbar {
                         if isFieldFocused {
                             ToolbarItemGroup(placement: .keyboard) {
@@ -106,6 +109,8 @@ public struct EditTextField: View {
                     }
                     .foregroundColor(.primary)
                     .padding(self.validationMessage.count == 0 ? 0 : 6)
+                    .padding(.trailing, 25)
+                    .clearButton(text: $valueToBindTo)
                     .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
                     .keyboardType(keyBoardType)
                     .onChange(of: valueToBindTo) {
@@ -173,12 +178,7 @@ public struct EditTextField: View {
         textIsValid = isValid.1
     }
 
-//    public func checkToValidate()  {
-//        if isValid.0 != title && isValid.0 != "" {
-//            textIsValid = true
-//        }
-//        textIsValid = isValid.1
-//    }
+
 }
 
 public enum EditFieldValidation: Hashable {
