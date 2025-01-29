@@ -56,7 +56,7 @@ public struct EditTextField: View {
                             .toolbar {
                                 if isFieldFocused {
                                     ToolbarItemGroup(placement: .keyboard) {
-                                        Spacer()
+                                       
                                         
                                         Button("Done") {
                                             isFieldFocused = false
