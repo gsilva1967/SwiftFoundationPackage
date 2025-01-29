@@ -17,11 +17,12 @@ public struct doneButtonModifier: ViewModifier {
             .toolbar {
                 if isFieldFocused {
                     ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
+                       
                         
                         Button("Done") {
                             isFieldFocused = false
                         }
+                        Spacer()
                     }
                 }
             }

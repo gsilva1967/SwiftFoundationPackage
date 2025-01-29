@@ -23,6 +23,7 @@ public struct EditTextField: View {
     @State var textIsValid: Bool = true
     @Binding public var isValid: (String, Bool)
     @Binding public var valueToBindTo: String
+    @FocusState public var isFieldFocused: Bool
 
     public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true) {
         self.title = title
@@ -36,6 +37,7 @@ public struct EditTextField: View {
         self.validationMessage = ""
         self._isValid = isValid!
         self.stacked = stacked
+        self.isFieldFocused = false
     }
 
     public var body: some View {
@@ -50,6 +52,19 @@ public struct EditTextField: View {
                 ZStack {
                     HStack {
                         TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                            .focused($isFieldFocused)
+                            .toolbar {
+                                if isFieldFocused {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        
+                                        Button("Done") {
+                                            isFieldFocused = false
+                                        }
+                                        Spacer()
+                                    }
+                                }
+                            }
                             .foregroundColor(.primary)
                             .padding(self.validationMessage.count == 0 ? 0 : 6)
                             .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
@@ -76,6 +91,19 @@ public struct EditTextField: View {
                 Spacer()
 
                 TextField(placeholderText, text: $valueToBindTo).clearButton(text: $valueToBindTo)
+                    .focused($isFieldFocused)
+                    .toolbar {
+                        if isFieldFocused {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                
+                                
+                                Button("Done") {
+                                    isFieldFocused = false
+                                }
+                                Spacer()
+                            }
+                        }
+                    }
                     .foregroundColor(.primary)
                     .padding(self.validationMessage.count == 0 ? 0 : 6)
                     .overlay(self.validationMessage.count == 0 ? nil : RoundedRectangle(cornerRadius: 10).stroke(Color.red, lineWidth: 0.33))
