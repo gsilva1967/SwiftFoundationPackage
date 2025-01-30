@@ -64,7 +64,6 @@ public struct EditTextField: View {
                                             isFieldFocused = false
                                         }
                                         .foregroundColor(.accentColor)
-                                        
                                     }
                                 }
                             }
@@ -105,7 +104,6 @@ public struct EditTextField: View {
                                     isFieldFocused = false
                                 }
                                 .foregroundColor(.accentColor)
-                                
                             }
                         }
                     }
