@@ -59,11 +59,11 @@ public struct EditTextField: View {
                                 if isFieldFocused {
                                     ToolbarItemGroup(placement: .keyboard) {
                                        
-                                        
+                                        Spacer()
                                         Button("Done") {
                                             isFieldFocused = false
                                         }
-                                        Spacer()
+                                        
                                     }
                                 }
                             }
@@ -99,11 +99,11 @@ public struct EditTextField: View {
                         if isFieldFocused {
                             ToolbarItemGroup(placement: .keyboard) {
                                 
-                                
+                                Spacer()
                                 Button("Done") {
                                     isFieldFocused = false
                                 }
-                                Spacer()
+                                
                             }
                         }
                     }

@@ -9,6 +9,9 @@
 import SwiftUI
 import UIKit
 
+import SwiftUI
+import UIKit
+
 public struct UITextViewWrapperForInsert: UIViewRepresentable {
     public typealias UIViewType = UITextView
 
@@ -34,10 +37,11 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         textField.keyboardType = keyBoardType
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
+       
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.items = [flexSpace, doneButton]
-        toolBar.setItems([doneButton], animated: true)
+        toolBar.items = [flexSpace,doneButton]
+        toolBar.setItems([flexSpace,doneButton], animated: true)
         textField.inputAccessoryView = toolBar
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
