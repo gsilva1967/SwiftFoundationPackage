@@ -19,6 +19,7 @@ public struct EditTextField: View {
     var showWarning: Bool = false
     var stacked: Bool = true
     var titleColor: Color = .secondary
+    var rightAligned: Bool = true
 
     @State var validationMessage: String
     @State var textIsValid: Bool = true
@@ -26,7 +27,7 @@ public struct EditTextField: View {
     @Binding public var valueToBindTo: String
     @FocusState public var isFieldFocused: Bool
 
-    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true, titleColor: Color = .secondary) {
+    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true, titleColor: Color = .secondary, rightAligned: Bool = true) {
         self.title = title
         self.placeholderText = placeholderText.isEmpty ? title : placeholderText
         self.minLength = minLength
@@ -40,6 +41,7 @@ public struct EditTextField: View {
         self.stacked = stacked
         self.isFieldFocused = false
         self.titleColor = titleColor
+        self.rightAligned = rightAligned
     }
 
     public var body: some View {
@@ -94,7 +96,7 @@ public struct EditTextField: View {
 
                 TextField(placeholderText, text: $valueToBindTo)
                     .focused($isFieldFocused)
-                    .multilineTextAlignment(.trailing)
+                    .multilineTextAlignment(rightAligned ? .trailing : .leading)
                     .toolbar {
                         if isFieldFocused {
                             ToolbarItemGroup(placement: .keyboard) {
