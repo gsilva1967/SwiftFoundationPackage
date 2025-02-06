@@ -154,6 +154,57 @@ public extension Date {
         
         return formatter.string(from: self)
     }
+    
+    //Overloaded methods to take in a string format
+    func formatDate(format: String, uselocalDateTimeFormatter: Bool = false, ignoreDeviceTimeFormat: Bool = false) -> String {
+        //if the date is 1/1/1970 return n/a
+        if (self.timeIntervalSinceReferenceDate == -978307200.0)
+        {
+            return "n/a"
+        }
+        
+        let formatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter()
+        if format.range(of: "h:", options: .caseInsensitive) != nil  && ignoreDeviceTimeFormat == false {
+            
+            if Locale.current.is24Hour && format.contains("a"){
+                formatter.dateFormat = format.replacingOccurrences(of: "a", with: "").replacingOccurrences(of: "h:", with: "HH:")
+                return formatter.string(from: self)
+            }
+            else if Locale.current.is24Hour && format.contains("a") == false{
+                formatter.dateFormat = format + " a"
+                return formatter.string(from: self)
+            }
+        }
+        
+        formatter.dateFormat = format
+                
+        return formatter.string(from: self)
+    }
+    
+    
+    func formatDateIgnoreTimeZone(format: String, ignoreDeviceTimeFormat: Bool = false) -> String {
+        //if the date is 1/1/1970 return n/a
+        if (self.timeIntervalSinceReferenceDate == -978307200.0)
+        {
+            return "n/a"
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        if format.range(of: "h:", options: .caseInsensitive) != nil && ignoreDeviceTimeFormat == false{
+            
+            if Locale.current.is24Hour && format.contains("a"){
+                formatter.dateFormat = format.replacingOccurrences(of: "a", with: "").replacingOccurrences(of: "h:", with: "HH:")
+                return formatter.string(from: self)
+            }
+            else if Locale.current.is24Hour && format.contains("a") == false{
+                formatter.dateFormat = format + " a"
+                return formatter.string(from: self)
+            }
+        }
+        
+        return formatter.string(from: self)
+    }
 
     /**
      Returns a date with no time associated with it
