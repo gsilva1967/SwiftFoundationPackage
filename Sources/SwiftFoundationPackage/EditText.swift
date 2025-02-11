@@ -95,15 +95,17 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         public func textViewDidChangeSelection(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
-                Global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
-                Global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
+                var global = Global()
+                global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
+                global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
             }
         }
 
         public func textViewDidBeginEditing(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
-                Global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
-                Global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
+                var global = Global()
+                global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
+                global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
             }
         }
 
@@ -162,7 +164,7 @@ public struct EditText: View {
 }
 
 public struct Global: Sendable {
-    public static var cursorPosition = CursorPosition(start: 0, end: 0)
+    public var cursorPosition = CursorPosition(start: 0, end: 0)
 }
 
 public struct CursorPosition: Sendable {
