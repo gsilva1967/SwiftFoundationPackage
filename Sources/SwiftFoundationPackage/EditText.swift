@@ -164,6 +164,7 @@ public struct EditText: View {
 }
 
 public struct Global: Sendable {
+    public init() {}
     public var cursorPosition = CursorPosition(start: 0, end: 0)
 }
 
