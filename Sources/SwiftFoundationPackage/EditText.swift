@@ -37,11 +37,11 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         textField.keyboardType = keyBoardType
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
-       
+
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.items = [flexSpace,doneButton]
-        toolBar.setItems([flexSpace,doneButton], animated: true)
+        toolBar.items = [flexSpace, doneButton]
+        toolBar.setItems([flexSpace, doneButton], animated: true)
         textField.inputAccessoryView = toolBar
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textField
@@ -96,7 +96,6 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         public func textViewDidChangeSelection(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
-               
                 global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
                 global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
             }
@@ -104,7 +103,6 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         public func textViewDidBeginEditing(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
-               
                 global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
                 global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
             }
@@ -145,7 +143,6 @@ public struct EditText: View {
         self.keyBoardType = keyBoardType
         _text = text
         _showingPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
-        
     }
 
     public var body: some View {
@@ -173,9 +170,8 @@ public struct CursorPosition: Sendable {
     public var end: Int
 }
 
-extension  UITextView{
-    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
-       self.resignFirstResponder()
+extension UITextView {
+    @objc func doneButtonTapped(button _: UIBarButtonItem) {
+        resignFirstResponder()
     }
-
 }
