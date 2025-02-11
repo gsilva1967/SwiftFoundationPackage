@@ -161,11 +161,11 @@ public struct EditText: View {
     }
 }
 
-public enum Global {
+public enum Global: Sendable {
     public static var cursorPosition = CursorPosition(start: 0, end: 0)
 }
 
-public struct CursorPosition {
+public struct CursorPosition: Sendable {
     public var start: Int
     public var end: Int
 }
