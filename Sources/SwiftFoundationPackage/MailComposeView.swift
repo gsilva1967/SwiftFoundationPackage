@@ -30,14 +30,14 @@ public struct MailComposeViewController: UIViewControllerRepresentable {
         return mail
     }
 
-    final public class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+    final public class Coordinator: NSObject, @preconcurrency MFMailComposeViewControllerDelegate {
         var parent: MailComposeViewController
 
         init(_ mailController: MailComposeViewController) {
             parent = mailController
         }
 
-        public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith _: MFMailComposeResult, error _: Error?) {
+        @MainActor public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith _: MFMailComposeResult, error _: Error?) {
             parent.didFinish()
             controller.dismiss(animated: true)
         }

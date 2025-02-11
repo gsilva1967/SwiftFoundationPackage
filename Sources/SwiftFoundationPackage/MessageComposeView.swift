@@ -86,14 +86,14 @@ public struct MessageComposeView: UIViewControllerRepresentable {
         Coordinator(completion: completion)
     }
 
-    public class Coordinator: NSObject, MFMessageComposeViewControllerDelegate {
+    public class Coordinator: NSObject, @preconcurrency MFMessageComposeViewControllerDelegate {
         public let completion: Completion?
 
         public init(completion: Completion?) {
             self.completion = completion
         }
 
-        public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        @MainActor public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
             controller.dismiss(animated: true, completion: nil)
             completion?(result == .sent)
         }

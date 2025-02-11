@@ -5,11 +5,13 @@
 //  Created by Michael Kacos on 5/3/23.
 //
 
-import CoreLocation
+@preconcurrency import CoreLocation
 import Foundation
 import UIKit
 
-@available(iOS 16.0, *)
+
+@available(iOS 17.0, *)
+@MainActor
 public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     public var locationManager = CLLocationManager()
     @Published public var authorizationStatus: CLAuthorizationStatus?
@@ -29,8 +31,17 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
         locationManager.stopUpdatingLocation()
     }
 
-    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
+    nonisolated public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        Task {
+            await changeMyAuthorization(status: manager.authorizationStatus)
+            if(manager.authorizationStatus == .notDetermined){
+                manager.requestWhenInUseAuthorization()
+            }
+        }
+    }
+    
+    public func changeMyAuthorization(status: CLAuthorizationStatus ) {
+        switch status {
         case .authorizedAlways: // Location services are available.
             // Insert code here of what should happen when Location services are authorized
             authorizationStatus = .authorizedAlways
@@ -51,21 +62,29 @@ public class LocationDataManager: NSObject, ObservableObject, CLLocationManagerD
 
         case .notDetermined: // Authorization not determined yet.
             authorizationStatus = .notDetermined
-            manager.requestWhenInUseAuthorization()
+            
 
         default:
             break
         }
     }
 
-    public func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    nonisolated public func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        Task{
+            await updateLastLocation(locations: locations)
+        }
+    }
+    
+    public func updateLastLocation(locations: [CLLocation]) {
         // Insert code to handle location updates
         lastLocation = locations.last
     }
 
-    public func locationManager(_: CLLocationManager, didFailWithError error: Error) {
+    nonisolated public func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         print("error: \(error.localizedDescription)")
     }
+    
+    
     
     public func convertAddress(address: String) {
             getCoordinate(addressString: address) { (location, error) in

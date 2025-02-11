@@ -22,7 +22,7 @@ public enum CommHelper {
         return number
     }
 
-    public static func callPhoneNumber(phone: String) {
+    @MainActor public static func callPhoneNumber(phone: String) {
         UIApplication.shared.open(getPhoneUrl(phone: phone))
     }
 

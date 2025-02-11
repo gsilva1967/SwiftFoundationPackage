@@ -10,7 +10,7 @@ import UIKit
 import StringExtensions
 
 public class EmailHelper {
-    public static func sendEmail(to: String?, cc: String?, bcc: String?, subject: String?, body: String?) {
+    @MainActor public static func sendEmail(to: String?, cc: String?, bcc: String?, subject: String?, body: String?) {
         var emailQueryString: String {
             var firstParameter = ""
             var rtnVal: String
