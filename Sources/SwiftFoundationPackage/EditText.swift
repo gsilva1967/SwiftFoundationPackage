@@ -161,6 +161,7 @@ public struct EditText: View {
     }
 }
 
+// Fixing commit
 public enum Global {
     public static var cursorPosition = CursorPosition(start: 0, end: 0)
 }
