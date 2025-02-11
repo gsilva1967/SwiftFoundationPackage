@@ -68,6 +68,7 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
         var onFocused: (() -> Void)?
         var onChangeValue: (() -> Void)?
         var keyBoardType: UIKeyboardType
+        var global = Global()
 
         init(text: Binding<String>, onDone: (() -> Void)? = nil, onFocused: (() -> Void)? = nil, onChangeValue: (() -> Void)? = nil, keyBoardType: UIKeyboardType = .default) {
             self.text = text
@@ -95,7 +96,7 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         public func textViewDidChangeSelection(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
-                var global = Global()
+               
                 global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
                 global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
             }
@@ -103,7 +104,7 @@ public struct UITextViewWrapperForInsert: UIViewRepresentable {
 
         public func textViewDidBeginEditing(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
-                var global = Global()
+               
                 global.cursorPosition.start = textView.offset(from: textView.beginningOfDocument, to: range.start)
                 global.cursorPosition.end = textView.offset(from: textView.beginningOfDocument, to: range.end)
             }
