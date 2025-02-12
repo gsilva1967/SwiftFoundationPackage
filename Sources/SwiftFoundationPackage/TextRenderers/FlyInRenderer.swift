@@ -20,7 +20,7 @@ public struct FlyInRenderer: TextRenderer {
     public func draw(layout: Text.Layout, in context: inout GraphicsContext) {
         for line in layout {
             for run in line {
-                for (index, glyph) in run.enumerated() {
+                for (_, glyph) in run.enumerated() {
                     let offset = 0 - xOffset
                     var copy = context
 

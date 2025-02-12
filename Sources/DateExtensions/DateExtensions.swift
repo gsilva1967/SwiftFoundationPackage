@@ -17,7 +17,7 @@ import Foundation
  1. needed for extensions of dates
  */
 
-public class localAdjustedDateformatter: DateFormatter {
+public class localAdjustedDateformatter: DateFormatter, @unchecked Sendable {
     override public init() {
         super.init()
         timeZone = TimeZone.current
@@ -29,7 +29,7 @@ public class localAdjustedDateformatter: DateFormatter {
     }
 }
 
-public class gmtAdjustedDateformatter: DateFormatter {
+public class gmtAdjustedDateformatter: DateFormatter, @unchecked Sendable {
     override public init() {
         super.init()
         timeZone = TimeZone(secondsFromGMT: 0)
