@@ -8,9 +8,8 @@
 
 import SwiftUI
 import UIKit
+import Synchronization
 
-import SwiftUI
-import UIKit
 
 public struct UITextViewWrapperForInsert: UIViewRepresentable {
     public typealias UIViewType = UITextView
@@ -162,7 +161,13 @@ public struct EditText: View {
 }
 
 public enum Global {
-    public static var cursorPosition = CursorPosition(start: 0, end: 0)
+    
+    nonisolated(unsafe) public static var cursorPosition: CursorPosition =  updateCursorPosition(start: 0, end: 0)
+}
+
+public func updateCursorPosition(start: Int, end: Int) -> CursorPosition {
+    return CursorPosition(start: start, end: end)
+    
 }
 
 public struct CursorPosition {
