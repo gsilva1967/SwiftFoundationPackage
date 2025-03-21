@@ -13,6 +13,7 @@ public struct EditTextField: View {
     public var title: String
     public var placeholderText: String = ""
     public var minLength: Int = 0
+    public var maxLength: Int = 256
     public var isRequired: Bool = false
     public var keyBoardType: UIKeyboardType = .default
     public var validationType: EditFieldValidation = .none
@@ -27,10 +28,11 @@ public struct EditTextField: View {
     @Binding public var valueToBindTo: String
     @FocusState public var isFieldFocused: Bool
 
-    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true, titleColor: Color = .secondary, rightAligned: Bool = true) {
+    public init(title: String, placeholderText: String = "", valueToBindTo: Binding<String>, minLength: Int = 0, maxLength: Int = 256,isRequired: Bool = false, keyBoardType: UIKeyboardType = .default, validationType: EditFieldValidation = .none, showWarning: Bool = false, isValid: Binding<(String, Bool)>? = .constant((.init(), true)), stacked: Bool = true, titleColor: Color = .secondary, rightAligned: Bool = true) {
         self.title = title
         self.placeholderText = placeholderText.isEmpty ? title : placeholderText
         self.minLength = minLength
+        self.maxLength = maxLength
         self._valueToBindTo = valueToBindTo
         self.isRequired = isRequired
         self.showWarning = showWarning
@@ -133,6 +135,11 @@ public struct EditTextField: View {
         isValid = (title, true)
         validationMessage = ""
 
+        //Not truly a validation, but more of a gate to prevent going over the max length
+        if valueToBindTo.count > maxLength {
+            valueToBindTo = String(valueToBindTo.prefix(maxLength))
+        }
+        
         if (isRequired == true && valueToBindTo.count == 0) || (minLength != 0 && (valueToBindTo.count > 0 && valueToBindTo.count < minLength)) {
             isValid.1 = false
             let newTitle = title.replacingOccurrences(of: "(required)", with: "")
