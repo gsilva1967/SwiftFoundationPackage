@@ -230,8 +230,8 @@ public extension Date {
      # Notes: #
      1. Originally in DateHelper class
      */
-    func getDateFromString(dateString: String) -> Date {
-        let dateFormatter = gmtAdjustedDateformatter()
+    func getDateFromString(dateString: String, uselocalDateTimeFormatter: Bool = false) -> Date {
+        let dateFormatter = uselocalDateTimeFormatter ? localAdjustedDateformatter() : gmtAdjustedDateformatter()
 
         switch dateString.count {
        
