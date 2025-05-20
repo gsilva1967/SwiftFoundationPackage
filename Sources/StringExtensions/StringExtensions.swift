@@ -36,6 +36,21 @@ public extension Optional where Wrapped == String {
         return returnVal
     }
     
+    var toDate: Date {
+        if self == nil {
+            var dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            return dateFormatter.date(from: "1970-01-01")!
+            
+        }
+        else
+        {
+            return Date().getDateFromString(dateString: self!)
+        }
+    }
+    
+    
     /**
      Determines if the string is numeric
 
