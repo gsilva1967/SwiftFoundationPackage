@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import DateExtensions
+
+// Will be adding the SwiftDate library to this project
 /**
  Extenstions for Strings
 
