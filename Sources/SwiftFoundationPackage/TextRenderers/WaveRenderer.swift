@@ -5,7 +5,7 @@
 //  Created by Michael Kacos on 10/24/24.
 //
 
-import SwiftUICore
+import SwiftUI
 
 @available(iOS 17.0, *)
 public struct WaveRenderer: TextRenderer {
