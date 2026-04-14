@@ -150,8 +150,8 @@ public struct EditTextField: View {
         case .email:
 //            let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
             
-            //Updated this so the regex would allow diacritic (accented) charachters
-            let regex = try! NSRegularExpression(pattern: "^[\\p{L}\\p{M}\\p{N}.!#$%&'*+/=?^_`{|}~-]+@[\\p{L}\\p{M}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?(?:\\.[\\p{L}\\p{M}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?)*$", options: .caseInsensitive)
+            // Allow diacritic characters in the local part, but keep the domain ASCII-only.
+            let regex = try! NSRegularExpression(pattern: "^[\\p{L}\\p{M}\\p{N}.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)*$", options: .caseInsensitive)
             if regex.firstMatch(in: valueToBindTo, options: [], range: NSRange(location: 0, length: valueToBindTo.count)) == nil {
                 isValid.1 = false
                 validationMessage = "Please enter a valid email address."
